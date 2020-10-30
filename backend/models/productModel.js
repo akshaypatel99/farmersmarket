@@ -24,24 +24,13 @@ const productSchema = mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		category: {
-			type: String,
-			required: true,
-		},
 		description: {
 			type: String,
 			required: true,
 		},
-		review: [reviewSchema],
-		rating: {
-			type: Number,
+		category: {
+			type: String,
 			required: true,
-			default: 0,
-		},
-		numReviews: {
-			type: Number,
-			required: true,
-			default: 0,
 		},
 		price: {
 			type: Number,
@@ -53,12 +42,23 @@ const productSchema = mongoose.Schema(
 			required: true,
 			default: 0,
 		},
+		rating: {
+			type: Number,
+			required: true,
+			default: 0,
+		},
+		numReviews: {
+			type: Number,
+			required: true,
+			default: 0,
+		},
+		review: [reviewSchema],
 	},
 	{
 		timestamps: true,
 	}
 );
 
-const Product = mongoose.model('Product', userSchema);
+const Product = mongoose.model('Product', productSchema);
 
 export default Product;
