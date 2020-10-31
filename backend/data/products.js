@@ -17,9 +17,9 @@ const products = [
 			'A cured pork product that comes either smoked or dry-cured. Pack of 8 rashers',
 		category: 'Meat',
 		price: 3.5,
-		countInStock: 76,
+		countInStock: 0,
 		rating: 5.0,
-		numReviews: 8,
+		numReviews: 32,
 	},
 	{
 		name: 'Bananas',
