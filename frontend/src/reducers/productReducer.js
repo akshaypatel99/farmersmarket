@@ -1,22 +1,43 @@
-import {
-	PRODUCT_LIST_FAIL,
-	PRODUCT_LIST_SUCCESS,
-	PRODUCT_LIST_REQUEST,
-} from '../actions/actionTypes';
+import * as actionTypes from '../actions/actionTypes';
 
 export const productListReducer = (state = { products: [] }, action) => {
 	switch (action.type) {
-		case PRODUCT_LIST_REQUEST:
+		case actionTypes.PRODUCT_LIST_REQUEST:
 			return {
 				loading: true,
 				products: [],
 			};
-		case PRODUCT_LIST_SUCCESS:
+		case actionTypes.PRODUCT_LIST_SUCCESS:
 			return {
 				loading: false,
 				products: action.payload,
 			};
-		case PRODUCT_LIST_FAIL:
+		case actionTypes.PRODUCT_LIST_FAIL:
+			return {
+				loading: false,
+				error: action.payload,
+			};
+		default:
+			return state;
+	}
+};
+
+export const productDetailReducer = (
+	state = { product: { reviews: [] } },
+	action
+) => {
+	switch (action.type) {
+		case actionTypes.PRODUCT_DETAIL_REQUEST:
+			return {
+				loading: true,
+				...state,
+			};
+		case actionTypes.PRODUCT_DETAIL_SUCCESS:
+			return {
+				loading: false,
+				product: action.payload,
+			};
+		case actionTypes.PRODUCT_DETAIL_FAIL:
 			return {
 				loading: false,
 				error: action.payload,
