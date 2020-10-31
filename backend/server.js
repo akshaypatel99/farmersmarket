@@ -1,8 +1,11 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import bodyParser from 'body-parser';
 import connectDB from './config/db.js';
-import productRoutes from './routes/productRoutes.js';
 import { notFound, errorHandler } from './middleware/error.js';
+
+import productRoutes from './routes/productRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 
 dotenv.config();
 
@@ -10,11 +13,15 @@ connectDB();
 
 const app = express();
 
+// Middleware
+app.use(bodyParser.json());
+
 app.get('/', (req, res, next) => {
 	res.send('API is running...');
 });
 
 app.use('/api/products', productRoutes);
+app.use('/api/users', authRoutes);
 
 app.use(notFound);
 

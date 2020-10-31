@@ -6,7 +6,7 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { listProducts } from '../actions/productActions';
 
-const HomeScreen = () => {
+const HomePage = () => {
 	const dispatch = useDispatch();
 
 	const productList = useSelector((state) => state.productList);
@@ -40,4 +40,4 @@ const HomeScreen = () => {
 	);
 };
 
-export default HomeScreen;
+export default HomePage;

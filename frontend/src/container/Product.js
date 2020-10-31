@@ -16,7 +16,7 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { listProductDetail } from '../actions/productActions';
 
-const ProductScreen = ({ history, match }) => {
+const ProductPage = ({ history, match }) => {
 	const [qty, setQty] = useState(1);
 
 	const dispatch = useDispatch();
@@ -28,16 +28,16 @@ const ProductScreen = ({ history, match }) => {
 		dispatch(listProductDetail(match.params.id));
 	}, [dispatch, match.params.id]);
 
-	const addToCartHandler = () => {
-		history.push(`/cart/${match.params.id}?qty=${qty}`);
+	const addToTrolleyHandler = () => {
+		history.push(`/trolley/${match.params.id}?qty=${qty}`);
 	};
 
-	let prodScreen = <Loader />;
+	let prodPage = <Loader />;
 
 	if (!loading && error) {
-		prodScreen = <Message variant='danger'>{error}</Message>;
+		prodPage = <Message variant='danger'>{error}</Message>;
 	} else {
-		prodScreen = (
+		prodPage = (
 			<Row>
 				<Col md={6}>
 					<Image src={product.image} alt={product.name} fluid />
@@ -71,7 +71,7 @@ const ProductScreen = ({ history, match }) => {
 								<Row>
 									<Col>Price:</Col>
 									<Col>
-										<strong>£{product.price}</strong>
+										<strong>£ {product.price}</strong>
 									</Col>
 								</Row>
 							</ListGroupItem>
@@ -114,9 +114,9 @@ const ProductScreen = ({ history, match }) => {
 									className='btn-block'
 									type='button'
 									disabled={product.countInStock === 0}
-									onClick={addToCartHandler}
+									onClick={addToTrolleyHandler}
 								>
-									ADD TO CART
+									ADD TO TROLLEY
 								</Button>
 							</ListGroupItem>
 						</ListGroup>
@@ -129,12 +129,12 @@ const ProductScreen = ({ history, match }) => {
 	return (
 		<>
 			<Link className='btn btn-light my-3' to='/'>
-				Return to Home
+				Return to Shop
 			</Link>
 
-			{prodScreen}
+			{prodPage}
 		</>
 	);
 };
 
-export default ProductScreen;
+export default ProductPage;

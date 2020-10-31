@@ -8,20 +8,22 @@ const Header = () => {
 			<Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect>
 				<Container>
 					<LinkContainer to='/'>
-						<Navbar.Brand>FARMER'S MARKET</Navbar.Brand>
+						<Navbar.Brand>
+							<strong>FARMER'S MARKET</strong>
+						</Navbar.Brand>
 					</LinkContainer>
 
 					<Navbar.Toggle aria-controls='basic-navbar-nav' />
 					<Navbar.Collapse id='basic-navbar-nav'>
 						<Nav className='ml-auto'>
-							<LinkContainer to='/cart'>
+							<LinkContainer to='/trolley'>
 								<Nav.Link>
-									<i className='fas fa-shopping-cart'></i> CART
+									<i className='fas fa-shopping-cart px-2'></i> TROLLEY
 								</Nav.Link>
 							</LinkContainer>
 							<LinkContainer to='/login'>
 								<Nav.Link>
-									<i className='fas fa-user'></i> SIGN IN
+									<i className='fas fa-user px-2'></i> LOG IN
 								</Nav.Link>
 							</LinkContainer>
 						</Nav>

@@ -16,7 +16,7 @@ const products = [
 		description:
 			'A cured pork product that comes either smoked or dry-cured. Pack of 8 rashers',
 		category: 'Meat',
-		price: 3.5,
+		price: 3.59,
 		countInStock: 0,
 		rating: 5.0,
 		numReviews: 32,
@@ -27,7 +27,7 @@ const products = [
 		description:
 			'Bananas are a popular tropical fruit that can be eaten on their own or incorporated into cooking and baking. Comes in a 1kg bunch.',
 		category: 'Fruit',
-		price: 1.5,
+		price: 1.59,
 		countInStock: 98,
 		rating: 4.5,
 		numReviews: 46,
@@ -38,7 +38,7 @@ const products = [
 		description:
 			'A classic choice of meat for a British Sunday roast. Comes as a roasting joint. Approximate weight of 1.5kg',
 		category: 'Meat',
-		price: 14.9,
+		price: 14.95,
 		countInStock: 76,
 		rating: 4.5,
 		numReviews: 38,
@@ -49,7 +49,7 @@ const products = [
 		description:
 			'Antioxidant-rich, brightly coloured blueberries, great healthy addition to porridge or yoghurt. Comes in a 400g punnet.',
 		category: 'Fruit',
-		price: 3.0,
+		price: 3.09,
 		countInStock: 46,
 		rating: 5,
 		numReviews: 21,
@@ -71,7 +71,7 @@ const products = [
 		description:
 			'Carrots are versatile bright orange root vegetables. Comes in a 1kg bag.',
 		category: 'Vegetable',
-		price: 1.8,
+		price: 1.89,
 		countInStock: 86,
 		rating: 4,
 		numReviews: 95,
@@ -82,7 +82,7 @@ const products = [
 		description:
 			'Chicken is an extremely versatile type of poultry. Comes as 1 whole large bird. Approximate weight 2kg.',
 		category: 'Meat',
-		price: 8.7,
+		price: 8.79,
 		countInStock: 35,
 		rating: 4,
 		numReviews: 48,
@@ -93,7 +93,7 @@ const products = [
 		description:
 			'Dark chocolate can be eaten on its own or used in baking. Comes as a 120g bar.',
 		category: 'Cupboard',
-		price: 2.0,
+		price: 1.99,
 		countInStock: 20,
 		rating: 3.5,
 		numReviews: 9,
@@ -104,7 +104,7 @@ const products = [
 		description:
 			'Spiced pork sausage is commonly used in Mexican and Spanish cuisine. Comes in a 80g pack.',
 		category: 'Meat',
-		price: 1.9,
+		price: 1.99,
 		countInStock: 68,
 		rating: 4,
 		numReviews: 12,
@@ -115,7 +115,7 @@ const products = [
 		description:
 			'Protein-packed eggs are a versatile ingredient. Comes in a box of 12.',
 		category: 'Meat',
-		price: 2.4,
+		price: 2.39,
 		countInStock: 57,
 		rating: 4,
 		numReviews: 77,
@@ -126,7 +126,7 @@ const products = [
 		description:
 			'Perfect for a Sunday roast. Comes as butterflied leg. Approximate weight 750g.',
 		category: 'Meat',
-		price: 13.6,
+		price: 13.59,
 		countInStock: 43,
 		rating: 5,
 		numReviews: 9,
@@ -137,7 +137,7 @@ const products = [
 		description:
 			'Lemons are sour, zesty, juicy fruits that are delicious in all sorts of sweet and savoury dishes. Comes in a bag of 4.',
 		category: 'Fruit',
-		price: 2.4,
+		price: 2.35,
 		countInStock: 38,
 		rating: 4,
 		numReviews: 97,
@@ -148,7 +148,7 @@ const products = [
 		description:
 			'Oats are a grain that are used to make porridge. Comes in a 1kg bag.',
 		category: 'Cupboard',
-		price: 1.5,
+		price: 1.45,
 		countInStock: 31,
 		rating: 4,
 		numReviews: 25,
@@ -159,7 +159,7 @@ const products = [
 		description:
 			'Olives are the fruit of a tree found across the Mediterranean. Comes in a 300g jar in olive oil.',
 		category: 'Cupboard',
-		price: 3.6,
+		price: 3.65,
 		countInStock: 18,
 		rating: 3.5,
 		numReviews: 13,
@@ -170,7 +170,7 @@ const products = [
 		description:
 			'Onions are endlessly versatile and an essential ingredient in countless recipes. Comes in a 1kg bag.',
 		category: 'Vegetable',
-		price: 1.1,
+		price: 1.15,
 		countInStock: 34,
 		rating: 4,
 		numReviews: 68,
@@ -181,7 +181,7 @@ const products = [
 		description:
 			'Juicy, sweet fruit come in many different varieties. Comes in a 1kg bag.',
 		category: 'Fruit',
-		price: 1.6,
+		price: 1.65,
 		countInStock: 80,
 		rating: 3.5,
 		numReviews: 54,
@@ -192,7 +192,7 @@ const products = [
 		description:
 			'Quickly picked and packed to retain its freshness. Comes in a 500g frozen bag.',
 		category: 'Vegetable',
-		price: 1.8,
+		price: 1.89,
 		countInStock: 27,
 		rating: 4.5,
 		numReviews: 94,
@@ -203,7 +203,7 @@ const products = [
 		description:
 			'Crackling joint perfect for roasts. Comes as 1.6kg leg joint.',
 		category: 'Meat',
-		price: 9,
+		price: 8.99,
 		countInStock: 39,
 		rating: 5,
 		numReviews: 85,
@@ -214,7 +214,7 @@ const products = [
 		description:
 			'Potatoes are an extremely popular starchy root vegetable. Comes in a 2kg bag.',
 		category: 'Vegetable',
-		price: 2.6,
+		price: 2.69,
 		countInStock: 89,
 		rating: 4.5,
 		numReviews: 52,
@@ -247,7 +247,7 @@ const products = [
 		description:
 			'This oily fish has a meaty texture and a strong flavour. Comes in a pack of 2 steaks. Approximate 250g.',
 		category: 'Meat',
-		price: 7.6,
+		price: 7.65,
 		countInStock: 11,
 		rating: 4,
 		numReviews: 79,

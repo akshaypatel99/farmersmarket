@@ -2,9 +2,9 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import HomeScreen from './container/HomeScreen';
-import ProductScreen from './container/ProductScreen';
-import CartScreen from './container/CartScreen';
+import HomePage from './container/Home';
+import ProductPage from './container/Product';
+import TrolleyPage from './container/Trolley';
 
 const App = () => {
 	return (
@@ -12,9 +12,9 @@ const App = () => {
 			<Header />
 			<main className='py-3'>
 				<Container>
-					<Route path='/' component={HomeScreen} exact />
-					<Route path='/product/:id' component={ProductScreen} />
-					<Route path='/cart/:id?' component={CartScreen} />
+					<Route path='/' component={HomePage} exact />
+					<Route path='/product/:id' component={ProductPage} />
+					<Route path='/trolley/:id?' component={TrolleyPage} />
 				</Container>
 			</main>
 			<Footer />
