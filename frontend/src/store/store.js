@@ -6,19 +6,26 @@ import {
 	productListReducer,
 } from './reducers/productReducer';
 import { trolleyReducer } from './reducers/trolleyReducer';
+import { loginReducer } from './reducers/userReducer';
 
 const reducer = combineReducers({
 	productList: productListReducer,
 	productDetail: productDetailReducer,
 	trolley: trolleyReducer,
+	userLogin: loginReducer,
 });
 
 const trolleyItemsLS = localStorage.getItem('trolleyItems')
 	? JSON.parse(localStorage.getItem('trolleyItems'))
 	: [];
 
+const userInfoLS = localStorage.getItem('userInfo')
+	? JSON.parse(localStorage.getItem('userInfo'))
+	: null;
+
 const initialState = {
 	trolley: { trolleyItems: trolleyItemsLS },
+	userLogin: { userInfo: userInfoLS },
 };
 
 const store = createStore(
