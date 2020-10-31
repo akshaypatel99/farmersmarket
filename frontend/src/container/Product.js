@@ -14,9 +14,9 @@ import {
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { listProductDetail } from '../actions/productActions';
+import { listProductDetail } from '../store/actions/productActions';
 
-const ProductPage = ({ history, match }) => {
+const Product = ({ history, match }) => {
 	const [qty, setQty] = useState(1);
 
 	const dispatch = useDispatch();
@@ -137,4 +137,4 @@ const ProductPage = ({ history, match }) => {
 	);
 };
 
-export default ProductPage;
+export default Product;

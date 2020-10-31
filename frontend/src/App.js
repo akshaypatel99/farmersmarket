@@ -2,9 +2,10 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import HomePage from './container/Home';
-import ProductPage from './container/Product';
-import TrolleyPage from './container/Trolley';
+import Home from './container/Home';
+import Product from './container/Product';
+import Trolley from './container/Trolley';
+import Login from './container/Login';
 
 const App = () => {
 	return (
@@ -12,9 +13,10 @@ const App = () => {
 			<Header />
 			<main className='py-3'>
 				<Container>
-					<Route path='/' component={HomePage} exact />
-					<Route path='/product/:id' component={ProductPage} />
-					<Route path='/trolley/:id?' component={TrolleyPage} />
+					<Route path='/login' component={Login} />
+					<Route path='/product/:id' component={Product} />
+					<Route path='/trolley/:id?' component={Trolley} />
+					<Route path='/' component={Home} exact />
 				</Container>
 			</main>
 			<Footer />

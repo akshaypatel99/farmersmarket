@@ -12,9 +12,12 @@ import {
 	ListGroupItem,
 	Row,
 } from 'react-bootstrap';
-import { addToTrolley, removeFromTrolley } from '../actions/trolleyActions';
+import {
+	addToTrolley,
+	removeFromTrolley,
+} from '../store/actions/trolleyActions';
 
-const TrolleyPage = ({ history, location, match }) => {
+const Trolley = ({ history, location, match }) => {
 	const prodId = match.params.id;
 
 	const qty = location.search ? Number(location.search.split('=')[1]) : 1;
@@ -134,4 +137,4 @@ const TrolleyPage = ({ history, location, match }) => {
 	);
 };
 
-export default TrolleyPage;
+export default Trolley;
