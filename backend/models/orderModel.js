@@ -52,6 +52,11 @@ const orderSchema = mongoose.Schema(
 				type: String,
 			},
 		},
+		trolleyTotal: {
+			type: Number,
+			required: true,
+			default: 0.0,
+		},
 		deliveryPrice: {
 			type: Number,
 			required: true,
