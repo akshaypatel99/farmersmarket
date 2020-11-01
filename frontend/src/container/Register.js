@@ -79,7 +79,7 @@ const Register = ({ history, location }) => {
 					<FormLabel>Password:</FormLabel>
 					<FormControl
 						type='password'
-						placeholder='******'
+						placeholder='********'
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
@@ -89,7 +89,7 @@ const Register = ({ history, location }) => {
 					<FormLabel>Confirm Password:</FormLabel>
 					<FormControl
 						type='password'
-						placeholder='******'
+						placeholder='********'
 						value={confirmPassword}
 						onChange={(e) => setConfirmPassword(e.target.value)}
 					/>

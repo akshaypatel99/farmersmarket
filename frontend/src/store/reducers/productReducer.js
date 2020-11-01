@@ -22,22 +22,22 @@ export const productListReducer = (state = { products: [] }, action) => {
 	}
 };
 
-export const productDetailReducer = (
+export const productProfileReducer = (
 	state = { product: { reviews: [] } },
 	action
 ) => {
 	switch (action.type) {
-		case actionTypes.PRODUCT_DETAIL_REQUEST:
+		case actionTypes.PRODUCT_PROFILE_REQUEST:
 			return {
 				loading: true,
 				...state,
 			};
-		case actionTypes.PRODUCT_DETAIL_SUCCESS:
+		case actionTypes.PRODUCT_PROFILE_SUCCESS:
 			return {
 				loading: false,
 				product: action.payload,
 			};
-		case actionTypes.PRODUCT_DETAIL_FAIL:
+		case actionTypes.PRODUCT_PROFILE_FAIL:
 			return {
 				loading: false,
 				error: action.payload,

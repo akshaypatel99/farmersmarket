@@ -43,3 +43,26 @@ export const registerReducer = (state = {}, action) => {
 			return state;
 	}
 };
+
+export const profileReducer = (state = { user: {} }, action) => {
+	switch (action.type) {
+		case actionTypes.USER_PROFILE_REQUEST:
+			return {
+				...state,
+				loading: true,
+			};
+		case actionTypes.USER_PROFILE_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				user: action.payload,
+			};
+		case actionTypes.USER_PROFILE_FAIL:
+			return {
+				loading: false,
+				error: action.payload,
+			};
+		default:
+			return state;
+	}
+};

@@ -22,19 +22,19 @@ export const listProducts = () => async (dispatch) => {
 	}
 };
 
-export const listProductDetail = (id) => async (dispatch) => {
+export const listProductProfile = (id) => async (dispatch) => {
 	try {
-		dispatch({ type: actionTypes.PRODUCT_DETAIL_REQUEST });
+		dispatch({ type: actionTypes.PRODUCT_PROFILE_REQUEST });
 
 		const { data } = await axios.get(`/api/products/${id}`);
 
 		dispatch({
-			type: actionTypes.PRODUCT_DETAIL_SUCCESS,
+			type: actionTypes.PRODUCT_PROFILE_SUCCESS,
 			payload: data,
 		});
 	} catch (error) {
 		dispatch({
-			type: actionTypes.PRODUCT_DETAIL_FAIL,
+			type: actionTypes.PRODUCT_PROFILE_FAIL,
 			payload:
 				error.response && error.response.data.message
 					? error.response.data.message

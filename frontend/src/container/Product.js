@@ -14,18 +14,18 @@ import {
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { listProductDetail } from '../store/actions/productActions';
+import { listProductProfile } from '../store/actions/productActions';
 
 const Product = ({ history, match }) => {
 	const [qty, setQty] = useState(1);
 
 	const dispatch = useDispatch();
 
-	const productDetail = useSelector((state) => state.productDetail);
-	const { loading, error, product } = productDetail;
+	const productProfile = useSelector((state) => state.productProfile);
+	const { loading, error, product } = productProfile;
 
 	useEffect(() => {
-		dispatch(listProductDetail(match.params.id));
+		dispatch(listProductProfile(match.params.id));
 	}, [dispatch, match.params.id]);
 
 	const addToTrolleyHandler = () => {

@@ -2,18 +2,23 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import {
-	productDetailReducer,
+	productProfileReducer,
 	productListReducer,
 } from './reducers/productReducer';
 import { trolleyReducer } from './reducers/trolleyReducer';
-import { loginReducer, registerReducer } from './reducers/userReducer';
+import {
+	loginReducer,
+	registerReducer,
+	profileReducer,
+} from './reducers/userReducer';
 
 const reducer = combineReducers({
 	productList: productListReducer,
-	productDetail: productDetailReducer,
+	productProfile: productProfileReducer,
 	trolley: trolleyReducer,
 	userLogin: loginReducer,
 	userRegister: registerReducer,
+	userProfile: profileReducer,
 });
 
 const trolleyItemsLS = localStorage.getItem('trolleyItems')
