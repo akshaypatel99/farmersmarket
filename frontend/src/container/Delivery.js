@@ -28,7 +28,7 @@ const Delivery = ({ history }) => {
 	return (
 		<FormWrap>
 			<CheckoutSteps step1 step2 />
-			<h1>Delivery</h1>
+			<h1>DELIVERY</h1>
 			<Form onSubmit={submitHandler}>
 				<FormGroup controlId='address'>
 					<FormLabel>Address:</FormLabel>

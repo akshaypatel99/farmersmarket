@@ -34,7 +34,7 @@ const Payment = ({ history }) => {
 	return (
 		<FormWrap>
 			<CheckoutSteps step1 step2 step3 />
-			<h1>Payment Method</h1>
+			<h1>PAYMENT METHOD</h1>
 			<Form onSubmit={submitHandler}>
 				<FormGroup>
 					<FormLabel as='legend'>Select payment method</FormLabel>

@@ -10,6 +10,7 @@ import Register from './container/Register';
 import Profile from './container/Profile';
 import Delivery from './container/Delivery';
 import Payment from './container/Payment';
+import PlaceOrder from './container/PlaceOrder';
 
 const App = () => {
 	return (
@@ -24,6 +25,7 @@ const App = () => {
 					<Route path='/trolley/:id?' component={Trolley} />
 					<Route path='/delivery' component={Delivery} />
 					<Route path='/payment' component={Payment} />
+					<Route path='/placeorder' component={PlaceOrder} />
 					<Route path='/' component={Home} exact />
 				</Container>
 			</main>
