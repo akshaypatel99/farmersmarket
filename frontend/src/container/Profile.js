@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { profile } from '../store/actions/userActions';
+import { profile, updateProfile } from '../store/actions/userActions';
 import {
 	Button,
 	Col,
@@ -30,6 +30,9 @@ const Profile = ({ history, location }) => {
 	const userProfile = useSelector((state) => state.userProfile);
 	const { loading, error, user } = userProfile;
 
+	const updatedUserProfile = useSelector((state) => state.updatedUserProfile);
+	const { successful } = updatedUserProfile;
+
 	const redirect = location.search ? location.search.split('=')[1] : '/';
 
 	useEffect(() => {
@@ -50,15 +53,16 @@ const Profile = ({ history, location }) => {
 		if (password !== confirmPassword) {
 			setMessage('Passwords must match.');
 		} else {
-			// Dispatch update profile
+			dispatch(updateProfile({ id: user._id, name, email, password }));
 		}
 	};
 
 	return (
 		<Row className='py-3'>
 			<Col md={3}>
-				<h2>Profile</h2>
+				<h2>My Profile</h2>
 				{message && <Message variant='danger'>{message}</Message>}
+				{successful && <Message variant='success'>Profile updated!</Message>}
 				{error && <Message variant='danger'>{error}</Message>}
 				{loading && <Loader />}
 				<Form onSubmit={submitHandler}>
@@ -105,12 +109,14 @@ const Profile = ({ history, location }) => {
 						/>
 					</FormGroup>
 
-					<Button variant='primary' type='submit'>
+					<Button variant='secondary' type='submit'>
 						Update Profile
 					</Button>
 				</Form>
 			</Col>
-			<Col md={9}>Orders</Col>
+			<Col md={9}>
+				<h2>My Orders</h2>
+			</Col>
 		</Row>
 	);
 };

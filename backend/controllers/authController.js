@@ -45,7 +45,7 @@ export const registerUser = asyncHandler(async (req, res) => {
 			name: user.name,
 			email: user.email,
 			isAdmin: user.isAdmin,
-			token: generateToken(user._id),
+			token: genToken(user._id),
 		});
 	} else {
 		res.status(400);
@@ -88,7 +88,7 @@ export const updateProfile = asyncHandler(async (req, res, next) => {
 			name: updatedUser.name,
 			email: updatedUser.email,
 			isAdmin: updatedUser.isAdmin,
-			token: generateToken(updatedUser._id),
+			token: genToken(updatedUser._id),
 		});
 	} else {
 		res.status(404);
