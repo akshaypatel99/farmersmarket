@@ -6,6 +6,7 @@ import Home from './container/Home';
 import Product from './container/Product';
 import Trolley from './container/Trolley';
 import Login from './container/Login';
+import Register from './container/Register';
 
 const App = () => {
 	return (
@@ -13,6 +14,7 @@ const App = () => {
 			<Header />
 			<main className='py-3'>
 				<Container>
+					<Route path='/register' component={Register} />
 					<Route path='/login' component={Login} />
 					<Route path='/product/:id' component={Product} />
 					<Route path='/trolley/:id?' component={Trolley} />

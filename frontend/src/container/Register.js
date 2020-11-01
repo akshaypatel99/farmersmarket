@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormWrap from '../components/Form';
-import { login } from '../store/actions/userActions';
+import { register } from '../store/actions/userActions';
 import {
 	Button,
 	Col,
@@ -16,14 +16,17 @@ import {
 	Row,
 } from 'react-bootstrap';
 
-const Login = ({ history, location }) => {
+const Register = ({ history, location }) => {
+	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [confirmPassword, setConfirmPassword] = useState('');
+	const [message, setMessage] = useState(null);
 
 	const dispatch = useDispatch();
 
-	const userLogin = useSelector((state) => state.userLogin);
-	const { loading, error, userInfo } = userLogin;
+	const userRegister = useSelector((state) => state.userRegister);
+	const { loading, error, userInfo } = userRegister;
 
 	const redirect = location.search ? location.search.split('=')[1] : '/';
 
@@ -35,15 +38,30 @@ const Login = ({ history, location }) => {
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-		dispatch(login(email, password));
+		if (password !== confirmPassword) {
+			setMessage('Passwords must match.');
+		} else {
+			dispatch(register(name, email, password));
+		}
 	};
 
 	return (
 		<FormWrap>
-			<h1>Log In</h1>
+			<h1>Register</h1>
+			{message && <Message variant='danger'>{message}</Message>}
 			{error && <Message variant='danger'>{error}</Message>}
 			{loading && <Loader />}
 			<Form onSubmit={submitHandler}>
+				<FormGroup controlId='name'>
+					<FormLabel>Name:</FormLabel>
+					<FormControl
+						type='name'
+						placeholder='Name'
+						value={name}
+						onChange={(e) => setName(e.target.value)}
+					/>
+				</FormGroup>
+
 				<FormGroup controlId='formBasicEmail'>
 					<FormLabel>Email address:</FormLabel>
 					<FormControl
@@ -67,8 +85,18 @@ const Login = ({ history, location }) => {
 					/>
 				</FormGroup>
 
+				<FormGroup controlId='confirmPassword'>
+					<FormLabel>Confirm Password:</FormLabel>
+					<FormControl
+						type='password'
+						placeholder='******'
+						value={confirmPassword}
+						onChange={(e) => setConfirmPassword(e.target.value)}
+					/>
+				</FormGroup>
+
 				<Button variant='primary' type='submit'>
-					Login
+					Sign me up!
 				</Button>
 			</Form>
 
@@ -76,9 +104,9 @@ const Login = ({ history, location }) => {
 				<Col>
 					<Link
 						className='ml-1'
-						to={redirect ? `/register?redirect=${redirect}` : '/register'}
+						to={redirect ? `/login?redirect=${redirect}` : '/login'}
 					>
-						Have an account? <strong>Register here</strong>
+						Have an account? <strong>Log in here</strong>
 					</Link>
 				</Col>
 			</Row>
@@ -86,4 +114,4 @@ const Login = ({ history, location }) => {
 	);
 };
 
-export default Login;
+export default Register;
