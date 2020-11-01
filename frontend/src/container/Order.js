@@ -12,19 +12,62 @@ import {
 } from 'react-bootstrap';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { getOrderDetails } from '../store/actions/orderActions';
+import { getOrderDetails, payOrder } from '../store/actions/orderActions';
+import axios from 'axios';
+import { PayPalButton } from 'react-paypal-button-v2';
+import { ORDER_PAY_RESET } from '../store/actions/actionTypes';
 
 const Order = ({ history, match }) => {
+	const [scriptLoaded, setScriptLoaded] = useState(false);
+
 	const orderId = match.params.id;
 
 	const orderDetails = useSelector((state) => state.orderDetails);
 	const { order, loading, error } = orderDetails;
 
+	const orderPay = useSelector((state) => state.orderPay);
+	const { loading: loadingPay, successful: successfulPay } = orderPay;
+
 	const dispatch = useDispatch();
 
+	if (!loading) {
+		const addDecimals = (num) => {
+			return (Math.round(num * 100) / 100).toFixed(2);
+		};
+
+		order.trolleyTotal = addDecimals(
+			order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+		);
+	}
+
 	useEffect(() => {
-		dispatch(getOrderDetails(orderId));
-	}, [dispatch, orderId]);
+		const paypalScript = async () => {
+			const { data: clientId } = await axios.get('/api/config/paypal');
+			const script = document.createElement('script');
+			script.type = 'text/javascript';
+			script.async = true;
+			script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+			script.onLoad = () => {
+				setScriptLoaded(true);
+			};
+			document.body.appendChild(script);
+		};
+
+		if (!order || successfulPay) {
+			dispatch({ type: ORDER_PAY_RESET });
+			dispatch(getOrderDetails(orderId));
+		} else if (!order.isPaid) {
+			if (!window.paypal) {
+				paypalScript();
+			} else {
+				setScriptLoaded(true);
+			}
+		}
+	}, [dispatch, order, orderId, successfulPay]);
+
+	const successfulPaymentHandler = (paymentResult) => {
+		dispatch(payOrder(orderId, paymentResult));
+	};
 
 	return loading ? (
 		<Loader />
@@ -127,6 +170,19 @@ const Order = ({ history, match }) => {
 									<Col>£{order.totalPrice}</Col>
 								</Row>
 							</ListGroup.Item>
+							{!order.isPaid && (
+								<ListGroupItem>
+									{/* {loadingPay && <Loader />} */}
+									{!scriptLoaded ? (
+										<Loader />
+									) : (
+										<PayPalButton
+											amount={order.totalPrice}
+											onSuccess={successfulPaymentHandler}
+										/>
+									)}
+								</ListGroupItem>
+							)}
 						</ListGroup>
 					</Card>
 				</Col>

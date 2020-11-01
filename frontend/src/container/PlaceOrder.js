@@ -133,8 +133,12 @@ const PlaceOrder = ({ history }) => {
 							</ListGroup.Item>
 							<ListGroup.Item>
 								<Row>
-									<Col>Total</Col>
-									<Col>£{trolley.totalPrice}</Col>
+									<Col>
+										<strong>Total</strong>
+									</Col>
+									<Col>
+										<strong>£{trolley.totalPrice}</strong>
+									</Col>
 								</Row>
 							</ListGroup.Item>
 							<ListGroup.Item>
