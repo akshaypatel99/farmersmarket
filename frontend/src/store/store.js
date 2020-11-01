@@ -6,6 +6,7 @@ import {
 	productListReducer,
 } from './reducers/productReducer';
 import { trolleyReducer } from './reducers/trolleyReducer';
+import { orderCreateReducer } from './reducers/orderReducer';
 import {
 	loginReducer,
 	registerReducer,
@@ -21,6 +22,7 @@ const reducer = combineReducers({
 	userRegister: registerReducer,
 	userProfile: profileReducer,
 	updatedUserProfile: updateProfileReducer,
+	orderCreate: orderCreateReducer,
 });
 
 const trolleyItemsLS = localStorage.getItem('trolleyItems')

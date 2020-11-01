@@ -12,11 +12,12 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
-// import { createOrder } from '../actions/orderActions';
+import { createOrder } from '../store/actions/orderActions';
 // import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 
-const PlaceOrder = () => {
-	// const dispatch = useDispatch();
+const PlaceOrder = ({ history }) => {
+	const dispatch = useDispatch();
+
 	const addDecimals = (num) => {
 		return (Math.round(num * 100) / 100).toFixed(2);
 	};
@@ -33,9 +34,29 @@ const PlaceOrder = () => {
 		Number(trolley.trolleyTotal) + Number(trolley.deliveryPrice)
 	).toFixed(2);
 
-	const placeOrderHandler = () => {};
+	const orderCreate = useSelector((state) => state.orderCreate);
+	const { order, successful, error } = orderCreate;
 
-	let error;
+	useEffect(() => {
+		if (successful) {
+			history.push(`/order/${order._id}`);
+			// dispatch({ type: ORDER_CREATE_RESET });
+		}
+		// eslint-disable-next-line
+	}, [history, successful]);
+
+	const placeOrderHandler = () => {
+		dispatch(
+			createOrder({
+				orderItems: trolley.trolleyItems,
+				deliveryAddress: trolley.deliveryAddress,
+				paymentMethod: trolley.paymentMethod,
+				trolleyTotal: trolley.itemsPrice,
+				deliveryPrice: trolley.deliveryPrice,
+				totalPrice: trolley.totalPrice,
+			})
+		);
+	};
 
 	return (
 		<>
