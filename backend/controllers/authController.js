@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import User from '../models/userModel.js';
-import genToken from '../util/gT.js';
+import generateToken from '../util/gT.js';
 
 // POST /api/users/login - Authenticate user and get token
 export const authUser = asyncHandler(async (req, res, next) => {
@@ -14,7 +14,7 @@ export const authUser = asyncHandler(async (req, res, next) => {
 			name: user.name,
 			email: user.email,
 			isAdmin: user.isAdmin,
-			token: genToken(user._id),
+			token: generateToken(user._id),
 		});
 	} else {
 		res.status(401);
@@ -45,7 +45,7 @@ export const registerUser = asyncHandler(async (req, res) => {
 			name: user.name,
 			email: user.email,
 			isAdmin: user.isAdmin,
-			token: genToken(user._id),
+			token: generateToken(user._id),
 		});
 	} else {
 		res.status(400);
@@ -88,7 +88,7 @@ export const updateProfile = asyncHandler(async (req, res, next) => {
 			name: updatedUser.name,
 			email: updatedUser.email,
 			isAdmin: updatedUser.isAdmin,
-			token: genToken(updatedUser._id),
+			token: generateToken(updatedUser._id),
 		});
 	} else {
 		res.status(404);

@@ -26,7 +26,8 @@ const Order = ({ history, match }) => {
 	const { order, loading, error } = orderDetails;
 
 	const orderPay = useSelector((state) => state.orderPay);
-	const { loading: loadingPay, successful: successfulPay } = orderPay;
+	// prettier-ignore
+	const { loading:loadingPay, successful:successfulPay } = orderPay;
 
 	const dispatch = useDispatch();
 
@@ -172,7 +173,7 @@ const Order = ({ history, match }) => {
 							</ListGroup.Item>
 							{!order.isPaid && (
 								<ListGroupItem>
-									{/* {loadingPay && <Loader />} */}
+									{loadingPay && <Loader />}
 									{!scriptLoaded ? (
 										<Loader />
 									) : (

@@ -70,3 +70,10 @@ export const updateOrderToPaid = asyncHandler(async (req, res) => {
 		throw new Error('Order not found.');
 	}
 });
+
+// GET /api/orders/myorders
+export const fetchMyOrders = asyncHandler(async (req, res) => {
+	const orders = await Order.find({ user: req.user._id });
+	console.log(req.user._id);
+	res.json(orders);
+});

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { profile, updateProfile } from '../store/actions/userActions';
+import { getUserOrders } from '../store/actions/orderActions';
 import {
 	Button,
 	Col,
@@ -33,6 +34,10 @@ const Profile = ({ history, location }) => {
 	const updatedUserProfile = useSelector((state) => state.updatedUserProfile);
 	const { successful } = updatedUserProfile;
 
+	const orderUserList = useSelector((state) => state.orderUserList);
+	// prettier-ignore
+	const { loading:loadingOrders, error:errorOrders, orders } = orderUserList;
+
 	const redirect = location.search ? location.search.split('=')[1] : '/';
 
 	useEffect(() => {
@@ -41,6 +46,7 @@ const Profile = ({ history, location }) => {
 		} else {
 			if (!user.name) {
 				dispatch(profile('profile'));
+				dispatch(getUserOrders());
 			} else {
 				setName(user.name);
 				setEmail(user.email);

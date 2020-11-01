@@ -3,6 +3,7 @@ import {
 	addOrder,
 	getOrderById,
 	updateOrderToPaid,
+	fetchMyOrders,
 } from '../controllers/orderController.js';
 import { authMid } from '../middleware/authMiddleware.js';
 
@@ -16,5 +17,8 @@ router.get('/:id', authMid, getOrderById);
 
 // PUT /api/orders/:id
 router.put('/:id/pay', authMid, updateOrderToPaid);
+
+// GET /api/orders/myorders
+router.get('/myorders', authMid, fetchMyOrders);
 
 export default router;
