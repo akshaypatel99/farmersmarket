@@ -39,7 +39,7 @@ const Trolley = ({ history, location, match }) => {
 	};
 
 	const checkoutHandler = () => {
-		history.push('/login?redirect=shipping');
+		history.push('/login?redirect=delivery');
 	};
 
 	return (

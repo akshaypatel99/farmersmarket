@@ -31,8 +31,12 @@ const userInfoLS = localStorage.getItem('userInfo')
 	? JSON.parse(localStorage.getItem('userInfo'))
 	: null;
 
+const deliverAddressLS = localStorage.getItem('deliveryAddress')
+	? JSON.parse(localStorage.getItem('deliveryAddress'))
+	: null;
+
 const initialState = {
-	trolley: { trolleyItems: trolleyItemsLS },
+	trolley: { trolleyItems: trolleyItemsLS, deliveryAddress: deliverAddressLS },
 	userLogin: { userInfo: userInfoLS },
 };
 

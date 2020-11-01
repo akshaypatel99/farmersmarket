@@ -8,6 +8,8 @@ import Trolley from './container/Trolley';
 import Login from './container/Login';
 import Register from './container/Register';
 import Profile from './container/Profile';
+import Delivery from './container/Delivery';
+import Payment from './container/Payment';
 
 const App = () => {
 	return (
@@ -20,6 +22,8 @@ const App = () => {
 					<Route path='/profile' component={Profile} />
 					<Route path='/product/:id' component={Product} />
 					<Route path='/trolley/:id?' component={Trolley} />
+					<Route path='/delivery' component={Delivery} />
+					<Route path='/payment' component={Payment} />
 					<Route path='/' component={Home} exact />
 				</Container>
 			</main>

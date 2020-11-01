@@ -1,6 +1,9 @@
 import * as actionTypes from '../actions/actionTypes';
 
-export const trolleyReducer = (state = { trolleyItems: [] }, action) => {
+export const trolleyReducer = (
+	state = { trolleyItems: [], deliveryAddress: {} },
+	action
+) => {
 	switch (action.type) {
 		case actionTypes.TROLLEY_ADD_ITEM:
 			const item = action.payload;
@@ -28,6 +31,18 @@ export const trolleyReducer = (state = { trolleyItems: [] }, action) => {
 				trolleyItems: state.trolleyItems.filter(
 					(tp) => tp.productId !== action.payload
 				),
+			};
+
+		case actionTypes.TROLLEY_SAVE_DELIVERY_ADDRESS:
+			return {
+				...state,
+				deliveryAddress: action.payload,
+			};
+
+		case actionTypes.TROLLEY_SAVE_PAYMENT_METHOD:
+			return {
+				...state,
+				paymentMethod: action.payload,
 			};
 		default:
 			return state;
