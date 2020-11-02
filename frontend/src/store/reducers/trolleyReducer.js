@@ -44,6 +44,11 @@ export const trolleyReducer = (
 				...state,
 				paymentMethod: action.payload,
 			};
+		case actionTypes.TROLLEY_RESET:
+			return {
+				trolleyItems: [],
+				deliveryAddress: {},
+			};
 		default:
 			return state;
 	}

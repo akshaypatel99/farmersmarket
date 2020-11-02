@@ -40,8 +40,20 @@ export const logout = () => (dispatch) => {
 	dispatch({
 		type: actionTypes.USER_LOGOUT,
 	});
+	dispatch({
+		type: actionTypes.USER_PROFILE_RESET,
+	});
+	dispatch({
+		type: actionTypes.ORDER_USER_LIST_RESET,
+	});
+	dispatch({
+		type: actionTypes.TROLLEY_RESET,
+	});
 
 	localStorage.removeItem('userInfo');
+	localStorage.removeItem('trolleyItems');
+	localStorage.removeItem('deliveryAddress');
+	localStorage.removeItem('paymentMethod');
 };
 
 export const register = (name, email, password) => async (dispatch) => {

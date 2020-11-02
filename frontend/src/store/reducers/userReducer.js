@@ -61,6 +61,11 @@ export const profileReducer = (state = { user: {} }, action) => {
 				loading: false,
 				error: action.payload,
 			};
+		case actionTypes.USER_PROFILE_RESET:
+			return {
+				loading: false,
+				user: {},
+			};
 		default:
 			return state;
 	}

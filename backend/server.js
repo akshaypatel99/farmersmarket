@@ -6,6 +6,7 @@ import { notFound, errorHandler } from './middleware/error.js';
 
 import productRoutes from './routes/productRoutes.js';
 import authRoutes from './routes/authRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 
 dotenv.config();
@@ -23,6 +24,7 @@ app.get('/', (req, res, next) => {
 
 app.use('/api/products', productRoutes);
 app.use('/api/users', authRoutes);
+app.use('/api/admin', adminRoutes);
 app.use('/api/orders', orderRoutes);
 
 app.get('/api/config/paypal', (req, res, next) =>
