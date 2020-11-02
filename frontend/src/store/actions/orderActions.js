@@ -135,7 +135,7 @@ export const getUserOrders = () => async (dispatch, getState) => {
 			},
 		};
 
-		const { data } = await axios.get(`/api/orders/myorders`, config);
+		const { data } = await axios.get(`/api/orders/user/myorders`, config);
 
 		dispatch({
 			type: actionTypes.ORDER_USER_LIST_SUCCESS,

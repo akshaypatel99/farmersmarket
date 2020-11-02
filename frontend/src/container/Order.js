@@ -8,7 +8,6 @@ import {
 	ListGroupItem,
 	Image,
 	Card,
-	Button,
 } from 'react-bootstrap';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
@@ -173,7 +172,7 @@ const Order = ({ history, match }) => {
 							</ListGroup.Item>
 							{!order.isPaid && (
 								<ListGroupItem>
-									{loadingPay && <Loader />}
+									{/* {loadingPay && <Loader />} */}
 									{!scriptLoaded ? (
 										<Loader />
 									) : (

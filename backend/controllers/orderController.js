@@ -71,8 +71,9 @@ export const updateOrderToPaid = asyncHandler(async (req, res) => {
 	}
 });
 
-// GET /api/orders/myorders
+// GET /api/orders/user/myorders
 export const fetchMyOrders = asyncHandler(async (req, res) => {
+	// const { userId } = req.body.user._id;
 	const orders = await Order.find({ user: req.user._id });
 	console.log(req.user._id);
 	res.json(orders);

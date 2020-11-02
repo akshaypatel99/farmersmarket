@@ -6,7 +6,7 @@ const router = express.Router();
 // GET /api/products
 router.get('/', getProducts);
 
-// GET /api/product/:id
+// GET /api/products/:id
 router.get('/:id', getProduct);
 
 export default router;

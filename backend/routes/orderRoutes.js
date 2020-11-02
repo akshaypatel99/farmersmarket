@@ -18,7 +18,7 @@ router.get('/:id', authMid, getOrderById);
 // PUT /api/orders/:id
 router.put('/:id/pay', authMid, updateOrderToPaid);
 
-// GET /api/orders/myorders
-router.get('/myorders', authMid, fetchMyOrders);
+// GET /api/orders/user/myorders
+router.get('/user/myorders', authMid, fetchMyOrders);
 
 export default router;
