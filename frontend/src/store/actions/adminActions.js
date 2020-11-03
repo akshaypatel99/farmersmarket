@@ -65,3 +65,78 @@ export const deleteUser = (id) => async (dispatch, getState) => {
 		});
 	}
 };
+
+export const adminGetUserProfile = (id) => async (dispatch, getState) => {
+	try {
+		dispatch({
+			type: actionTypes.ADMIN_USER_PROFILE_REQUEST,
+		});
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		const { data } = await axios.get(`/api/admin/users/${id}`, config);
+
+		dispatch({
+			type: actionTypes.ADMIN_USER_PROFILE_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		dispatch({
+			type: actionTypes.ADMIN_USER_PROFILE_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+};
+
+export const adminUpdateProfile = (user) => async (dispatch, getState) => {
+	try {
+		dispatch({
+			type: actionTypes.ADMIN_USER_UPDATE_PROFILE_REQUEST,
+		});
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		const { data } = await axios.put(
+			`/api/admin/users/${user._id}`,
+			user,
+			config
+		);
+
+		dispatch({
+			type: actionTypes.ADMIN_USER_UPDATE_PROFILE_SUCCESS,
+		});
+		dispatch({
+			type: actionTypes.ADMIN_USER_PROFILE_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		dispatch({
+			type: actionTypes.ADMIN_USER_UPDATE_PROFILE_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+};

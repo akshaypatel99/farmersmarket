@@ -44,7 +44,7 @@ export const registerReducer = (state = {}, action) => {
 	}
 };
 
-export const profileReducer = (state = { user: {} }, action) => {
+export const getProfileReducer = (state = { user: {} }, action) => {
 	switch (action.type) {
 		case actionTypes.USER_PROFILE_REQUEST:
 			return {

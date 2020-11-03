@@ -46,3 +46,57 @@ export const deleteUserReducer = (state = {}, action) => {
 			return state;
 	}
 };
+
+export const adminGetProfileReducer = (state = { user: {} }, action) => {
+	switch (action.type) {
+		case actionTypes.ADMIN_USER_PROFILE_REQUEST:
+			return {
+				...state,
+				loading: true,
+			};
+		case actionTypes.ADMIN_USER_PROFILE_SUCCESS:
+			return {
+				loading: false,
+				aduser: action.payload,
+			};
+		case actionTypes.ADMIN_USER_PROFILE_FAIL:
+			return {
+				loading: false,
+				error: action.payload,
+			};
+		case actionTypes.ADMIN_USER_PROFILE_RESET:
+			return {
+				loading: false,
+				aduser: {},
+			};
+		default:
+			return state;
+	}
+};
+
+export const adminUpdateProfileReducer = (state = { user: {} }, action) => {
+	switch (action.type) {
+		case actionTypes.ADMIN_USER_UPDATE_PROFILE_REQUEST:
+			return {
+				...state,
+				loading: true,
+			};
+		case actionTypes.ADMIN_USER_UPDATE_PROFILE_SUCCESS:
+			return {
+				loading: false,
+				success: true,
+			};
+		case actionTypes.ADMIN_USER_UPDATE_PROFILE_FAIL:
+			return {
+				loading: false,
+				error: action.payload,
+			};
+		case actionTypes.ADMIN_USER_UPDATE_PROFILE_RESET:
+			return {
+				loading: false,
+				user: {},
+			};
+		default:
+			return state;
+	}
+};

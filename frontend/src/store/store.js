@@ -15,12 +15,14 @@ import {
 import {
 	loginReducer,
 	registerReducer,
-	profileReducer,
+	getProfileReducer,
 	updateProfileReducer,
 } from './reducers/userReducer';
 import {
 	listAllUsersReducer,
 	deleteUserReducer,
+	adminGetProfileReducer,
+	adminUpdateProfileReducer,
 } from './reducers/adminReducer';
 
 const reducer = combineReducers({
@@ -29,10 +31,12 @@ const reducer = combineReducers({
 	trolley: trolleyReducer,
 	userLogin: loginReducer,
 	userRegister: registerReducer,
-	userProfile: profileReducer,
+	userProfile: getProfileReducer,
 	updatedUserProfile: updateProfileReducer,
 	userList: listAllUsersReducer,
 	userDelete: deleteUserReducer,
+	adminGetUser: adminGetProfileReducer,
+	adminUpdateUser: adminUpdateProfileReducer,
 	orderCreate: orderCreateReducer,
 	orderDetails: orderDetailsReducer,
 	orderPay: orderPayReducer,

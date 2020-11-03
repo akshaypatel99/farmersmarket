@@ -3,15 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
-import { Button, Table } from 'react-bootstrap';
-import { listAllUsers, deleteUser } from '../../store/actions/adminActions';
+import { Button, Table, Row, Col } from 'react-bootstrap';
+import { listProducts } from '../../store/actions/productActions';
+import Rating from '../../components/Rating';
 
-const UserList = ({ history }) => {
+const ProductList = ({ history, match }) => {
 	const [deleted, setDeleted] = useState(false);
 	const dispatch = useDispatch();
 
-	const userList = useSelector((state) => state.userList);
-	const { users, loading, error } = userList;
+	const productList = useSelector((state) => state.productList);
+	const { products, loading, error } = productList;
 
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
@@ -20,23 +21,34 @@ const UserList = ({ history }) => {
 
 	useEffect(() => {
 		if (userInfo && userInfo.isAdmin) {
-			dispatch(listAllUsers());
+			dispatch(listProducts());
 		} else {
 			history.push('/');
 		}
-	}, [dispatch, history, userInfo, deleted]);
+	}, [dispatch, history, userInfo]);
 
-	const deleteUserHandler = (id) => {
+	const createProductHandler = () => {};
+
+	const deleteProductHandler = (id) => {
 		if (window.confirm('Are you sure you want to delete user?')) {
-			dispatch(deleteUser(id));
-			setDeleted(!deleted);
+			// dispatch(deleteUser(id));
+			// setDeleted(!deleted);
 		}
 		return;
 	};
 
 	return (
 		<>
-			<h1>All Users</h1>
+			<Row className='align-items-center'>
+				<Col>
+					<h1>All Products</h1>
+				</Col>
+				<Col className='text-right'>
+					<Button className='my-3' onClick={createProductHandler}>
+						<i className='fas fa-plus'></i> Create Product
+					</Button>
+				</Col>
+			</Row>
 			{loading ? (
 				<Loader />
 			) : error ? (
@@ -45,41 +57,35 @@ const UserList = ({ history }) => {
 				<Table striped hover responsive>
 					<thead>
 						<tr>
-							<th>USER ID</th>
+							<th>PRODUCT ID</th>
 							<th>NAME</th>
-							<th>EMAIL</th>
-							<th>ADMIN</th>
-							<th>EDIT</th>
-							<th>DELETE</th>
+							<th>PRICE (£)</th>
+							<th>CATEGORY</th>
+							<th>STOCK COUNT</th>
+							<th>RATING</th>
+							<th>REVIEW COUNT</th>
 						</tr>
 					</thead>
 					<tbody>
-						{users.map((user) => (
-							<tr key={user._id}>
-								<td>{user._id}</td>
+						{products.map((product) => (
+							<tr key={product._id}>
+								<td>{product._id}</td>
 								<td>
-									<strong>{user.name}</strong>
+									<strong>{product.name}</strong>
 								</td>
 								<td>
-									<a href={`mailto:${user.email}`}>
-										<strong>{user.email}</strong>
-									</a>
+									<strong>{product.price}</strong>
+								</td>
+								<td>{product.category}</td>
+								<td>
+									<strong>{product.countInStock}</strong>
 								</td>
 								<td>
-									{user.isAdmin ? (
-										<i
-											className='far fa-check-circle'
-											style={{ color: '#56cc9d' }}
-										></i>
-									) : (
-										<i
-											className='far fa-times-circle'
-											style={{ color: '#ff7851' }}
-										></i>
-									)}
+									<Rating value={product.rating} color='#888' />
 								</td>
+								<td>{product.numReviews}</td>
 								<td>
-									<LinkContainer to={`/editusers/${user._id}/`}>
+									<LinkContainer to={`/editproducts/${product._id}/`}>
 										<Button variant='info' className='btn-sm'>
 											<i
 												className='fas fa-user-edit'
@@ -92,7 +98,7 @@ const UserList = ({ history }) => {
 									<Button
 										variant='danger'
 										className='btn-sm'
-										onClick={() => deleteUserHandler(user._id)}
+										onClick={() => deleteProductHandler(product._id)}
 									>
 										<i
 											className='fas fa-trash-alt'
@@ -109,4 +115,4 @@ const UserList = ({ history }) => {
 	);
 };
 
-export default UserList;
+export default ProductList;

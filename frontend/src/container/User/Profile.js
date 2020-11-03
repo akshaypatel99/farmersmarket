@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
-import { profile, updateProfile } from '../../store/actions/userActions';
+import { getUserProfile, updateProfile } from '../../store/actions/userActions';
 import { getUserOrders } from '../../store/actions/orderActions';
 import {
 	Button,
@@ -46,7 +46,7 @@ const Profile = ({ history, location }) => {
 			history.push('/login');
 		} else {
 			if (!user.name) {
-				dispatch(profile('profile'));
+				dispatch(getUserProfile('profile'));
 				dispatch(getUserOrders());
 			} else {
 				setName(user.name);

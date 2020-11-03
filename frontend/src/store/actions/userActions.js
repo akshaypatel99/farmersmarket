@@ -99,7 +99,7 @@ export const register = (name, email, password) => async (dispatch) => {
 	}
 };
 
-export const profile = (id) => async (dispatch, getState) => {
+export const getUserProfile = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({
 			type: actionTypes.USER_PROFILE_REQUEST,
