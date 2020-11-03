@@ -4,6 +4,7 @@ import {
 	getUserById,
 	updateUser,
 	getAllProfiles,
+	deleteProduct,
 } from '../controllers/adminController.js';
 import { authMid, adminMid } from '../middleware/authMiddleware.js';
 
@@ -20,5 +21,8 @@ router.put('/users/:id', authMid, adminMid, updateUser);
 
 // DELETE /api/admin/users/:id - Delete user profile
 router.delete('/users/:id', authMid, adminMid, deleteUser);
+
+// DELETE /api/admin/product/:id - Delete product
+router.delete('/product/:id', authMid, adminMid, deleteProduct);
 
 export default router;

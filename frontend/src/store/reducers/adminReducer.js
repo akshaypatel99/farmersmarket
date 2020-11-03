@@ -28,16 +28,16 @@ export const listAllUsersReducer = (state = { users: [] }, action) => {
 
 export const deleteUserReducer = (state = {}, action) => {
 	switch (action.type) {
-		case actionTypes.ADMIN_USER_LIST_REQUEST:
+		case actionTypes.ADMIN_USER_DELETE_REQUEST:
 			return {
 				loading: true,
 			};
-		case actionTypes.ADMIN_USER_LIST_SUCCESS:
+		case actionTypes.ADMIN_USER_DELETE_SUCCESS:
 			return {
 				loading: false,
-				successful: true,
+				success: true,
 			};
-		case actionTypes.ADMIN_USER_LIST_FAIL:
+		case actionTypes.ADMIN_USER_DELETE_FAIL:
 			return {
 				loading: false,
 				error: action.payload,
@@ -95,6 +95,27 @@ export const adminUpdateProfileReducer = (state = { user: {} }, action) => {
 			return {
 				loading: false,
 				user: {},
+			};
+		default:
+			return state;
+	}
+};
+
+export const productDeleteReducer = (state = {}, action) => {
+	switch (action.type) {
+		case actionTypes.ADMIN_PRODUCT_DELETE_REQUEST:
+			return {
+				loading: true,
+			};
+		case actionTypes.ADMIN_PRODUCT_DELETE_SUCCESS:
+			return {
+				loading: false,
+				success: true,
+			};
+		case actionTypes.ADMIN_PRODUCT_DELETE_FAIL:
+			return {
+				loading: false,
+				error: action.payload,
 			};
 		default:
 			return state;

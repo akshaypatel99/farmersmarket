@@ -16,7 +16,13 @@ const UserList = ({ history }) => {
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
-	// const userDelete = useSelector((state) => state.userDelete);
+	const userDelete = useSelector((state) => state.userDelete);
+	// prettier-ignore
+	const {
+		success: successDelete,
+		loading: loadingDelete,
+		error: errorDelete,
+	} = userDelete;
 
 	useEffect(() => {
 		if (userInfo && userInfo.isAdmin) {
@@ -24,7 +30,7 @@ const UserList = ({ history }) => {
 		} else {
 			history.push('/');
 		}
-	}, [dispatch, history, userInfo, deleted]);
+	}, [dispatch, history, userInfo, deleted, successDelete]);
 
 	const deleteUserHandler = (id) => {
 		if (window.confirm('Are you sure you want to delete user?')) {
@@ -37,6 +43,8 @@ const UserList = ({ history }) => {
 	return (
 		<>
 			<h1>All Users</h1>
+			{loadingDelete && <Loader />}
+			{errorDelete && <Message variant='danger'>{errorDelete}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (

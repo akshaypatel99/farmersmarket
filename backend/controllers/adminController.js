@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import User from '../models/userModel.js';
+import Product from '../models/productModel.js';
 
 // GET /api/admin/users/ - Get all user profiles
 export const getAllProfiles = asyncHandler(async (req, res, next) => {
@@ -43,7 +44,7 @@ export const updateUser = asyncHandler(async (req, res, next) => {
 	}
 });
 
-// DELETE /api/users/:id - Delete user profile
+// DELETE /api/admin/users/:id - Delete user profile
 export const deleteUser = asyncHandler(async (req, res, next) => {
 	const user = await User.findById(req.params.id);
 
@@ -53,5 +54,17 @@ export const deleteUser = asyncHandler(async (req, res, next) => {
 	} else {
 		res.status(404);
 		throw new Error('User not found.');
+	}
+});
+
+// DELETE /api/admin/product/:id - Delete product
+export const deleteProduct = asyncHandler(async (req, res, next) => {
+	const product = await Product.findById(req.params.id);
+	if (product) {
+		await product.remove();
+		res.json({ message: 'Product deleted.' });
+	} else {
+		res.status(404);
+		throw new Error('Product not found');
 	}
 });

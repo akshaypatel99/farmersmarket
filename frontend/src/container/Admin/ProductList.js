@@ -5,6 +5,7 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import { Button, Table, Row, Col } from 'react-bootstrap';
 import { listProducts } from '../../store/actions/productActions';
+import { deleteProduct } from '../../store/actions/adminActions';
 import Rating from '../../components/Rating';
 
 const ProductList = ({ history, match }) => {
@@ -14,10 +15,16 @@ const ProductList = ({ history, match }) => {
 	const productList = useSelector((state) => state.productList);
 	const { products, loading, error } = productList;
 
+	const productDelete = useSelector((state) => state.productList);
+	// prettier-ignore
+	const {
+		success:successDelete,
+		loading:loadingDelete,
+		error:errorDelete,
+	} = productDelete;
+
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
-
-	// const userDelete = useSelector((state) => state.userDelete);
 
 	useEffect(() => {
 		if (userInfo && userInfo.isAdmin) {
@@ -25,14 +32,14 @@ const ProductList = ({ history, match }) => {
 		} else {
 			history.push('/');
 		}
-	}, [dispatch, history, userInfo]);
+	}, [dispatch, history, userInfo, deleted, successDelete]);
 
 	const createProductHandler = () => {};
 
 	const deleteProductHandler = (id) => {
 		if (window.confirm('Are you sure you want to delete user?')) {
-			// dispatch(deleteUser(id));
-			// setDeleted(!deleted);
+			dispatch(deleteProduct(id));
+			setDeleted(!deleted);
 		}
 		return;
 	};
@@ -49,6 +56,8 @@ const ProductList = ({ history, match }) => {
 					</Button>
 				</Col>
 			</Row>
+			{loadingDelete && <Loader />}
+			{errorDelete && <Message variant='danger'>{errorDelete}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (
