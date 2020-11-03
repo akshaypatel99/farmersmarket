@@ -9,12 +9,12 @@ import {
 	Image,
 	Card,
 } from 'react-bootstrap';
-import Message from '../components/Message';
-import Loader from '../components/Loader';
-import { getOrderDetails, payOrder } from '../store/actions/orderActions';
+import Message from '../../components/Message';
+import Loader from '../../components/Loader';
+import { getOrderDetails, payOrder } from '../../store/actions/orderActions';
 import axios from 'axios';
 import { PayPalButton } from 'react-paypal-button-v2';
-import { ORDER_PAY_RESET } from '../store/actions/actionTypes';
+import { ORDER_PAY_RESET } from '../../store/actions/actionTypes';
 
 const Order = ({ history, match }) => {
 	const [scriptLoaded, setScriptLoaded] = useState(false);

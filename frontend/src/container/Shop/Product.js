@@ -11,10 +11,10 @@ import {
 	ListGroupItem,
 	FormControl,
 } from 'react-bootstrap';
-import Rating from '../components/Rating';
-import Loader from '../components/Loader';
-import Message from '../components/Message';
-import { listProductProfile } from '../store/actions/productActions';
+import Rating from '../../components/Rating';
+import Loader from '../../components/Loader';
+import Message from '../../components/Message';
+import { listProductProfile } from '../../store/actions/productActions';
 
 const Product = ({ history, match }) => {
 	const [qty, setQty] = useState(1);

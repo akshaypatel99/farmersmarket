@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Message from '../components/Message';
+import Message from '../../components/Message';
 import {
 	Button,
 	Card,
@@ -15,7 +15,7 @@ import {
 import {
 	addToTrolley,
 	removeFromTrolley,
-} from '../store/actions/trolleyActions';
+} from '../../store/actions/trolleyActions';
 
 const Trolley = ({ history, location, match }) => {
 	const prodId = match.params.id;

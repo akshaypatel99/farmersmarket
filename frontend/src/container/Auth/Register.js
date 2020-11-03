@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Message from '../components/Message';
-import Loader from '../components/Loader';
-import FormWrap from '../components/Form';
-import { register } from '../store/actions/userActions';
+import Message from '../../components/Message';
+import Loader from '../../components/Loader';
+import FormWrap from '../../components/Form';
+import { register } from '../../store/actions/userActions';
 import {
 	Button,
 	Col,

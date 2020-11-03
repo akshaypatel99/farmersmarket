@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
-import Message from '../components/Message';
-import Loader from '../components/Loader';
-import { profile, updateProfile } from '../store/actions/userActions';
-import { getUserOrders } from '../store/actions/orderActions';
+import Message from '../../components/Message';
+import Loader from '../../components/Loader';
+import { profile, updateProfile } from '../../store/actions/userActions';
+import { getUserOrders } from '../../store/actions/orderActions';
 import {
 	Button,
 	Col,
@@ -150,7 +150,7 @@ const Profile = ({ history, location }) => {
 											order.paidAt.substring(0, 10)
 										) : (
 											<i
-												className='fad fa-times-circle'
+												className='far fa-times-circle'
 												style={{ color: '#ff7851' }}
 											></i>
 										)}

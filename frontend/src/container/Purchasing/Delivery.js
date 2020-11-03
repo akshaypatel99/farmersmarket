@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import FormWrap from '../components/Form';
-import { saveDeliveryAddress } from '../store/actions/trolleyActions';
-import CheckoutSteps from '../components/CheckoutSteps';
+import { useDispatch } from 'react-redux';
+import FormWrap from '../../components/Form';
+import { saveDeliveryAddress } from '../../store/actions/trolleyActions';
+import CheckoutSteps from '../../components/CheckoutSteps';
 
 import {
 	Button,

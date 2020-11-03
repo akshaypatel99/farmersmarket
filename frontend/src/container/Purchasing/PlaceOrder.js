@@ -10,9 +10,9 @@ import {
 	ListGroupItem,
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/Message';
-import CheckoutSteps from '../components/CheckoutSteps';
-import { createOrder } from '../store/actions/orderActions';
+import Message from '../../components/Message';
+import CheckoutSteps from '../../components/CheckoutSteps';
+import { createOrder } from '../../store/actions/orderActions';
 // import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 
 const PlaceOrder = ({ history }) => {

@@ -121,7 +121,7 @@ export const profile = (id) => async (dispatch, getState) => {
 		});
 	} catch (error) {
 		dispatch({
-			type: actionTypes.USER_REGISTER_FAIL,
+			type: actionTypes.USER_PROFILE_FAIL,
 			payload:
 				error.response && error.response.data.message
 					? error.response.data.message
