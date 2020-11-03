@@ -5,6 +5,8 @@ import {
 	updateUser,
 	getAllProfiles,
 	deleteProduct,
+	updateProduct,
+	createProduct,
 } from '../controllers/adminController.js';
 import { authMid, adminMid } from '../middleware/authMiddleware.js';
 
@@ -21,6 +23,12 @@ router.put('/users/:id', authMid, adminMid, updateUser);
 
 // DELETE /api/admin/users/:id - Delete user profile
 router.delete('/users/:id', authMid, adminMid, deleteUser);
+
+// POST /api/admin/product - Create product
+router.post('/product/create', authMid, adminMid, createProduct);
+
+// PUT /api/admin/product/:id - Update product
+router.put('/product/:id', authMid, adminMid, updateProduct);
 
 // DELETE /api/admin/product/:id - Delete product
 router.delete('/product/:id', authMid, adminMid, deleteProduct);
