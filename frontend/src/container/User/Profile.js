@@ -39,7 +39,7 @@ const Profile = ({ history, location }) => {
 	// prettier-ignore
 	const { loading:loadingOrders, error:errorOrders, orders } = orderUserList;
 
-	const redirect = location.search ? location.search.split('=')[1] : '/';
+	// const redirect = location.search ? location.search.split('=')[1] : '/';
 
 	useEffect(() => {
 		if (!userInfo) {

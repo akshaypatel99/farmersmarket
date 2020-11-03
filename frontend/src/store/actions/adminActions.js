@@ -33,3 +33,35 @@ export const listAllUsers = () => async (dispatch, getState) => {
 		});
 	}
 };
+
+export const deleteUser = (id) => async (dispatch, getState) => {
+	try {
+		dispatch({
+			type: actionTypes.ADMIN_USER_DELETE_REQUEST,
+		});
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		await axios.delete(`api/admin/users/${id}`, config);
+
+		dispatch({
+			type: actionTypes.ADMIN_USER_DELETE_SUCCESS,
+		});
+	} catch (error) {
+		dispatch({
+			type: actionTypes.ADMIN_USER_DELETE_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+};

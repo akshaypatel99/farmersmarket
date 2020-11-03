@@ -49,6 +49,9 @@ export const logout = () => (dispatch) => {
 	dispatch({
 		type: actionTypes.TROLLEY_RESET,
 	});
+	dispatch({
+		type: actionTypes.ADMIN_USER_LIST_RESET,
+	});
 
 	localStorage.removeItem('userInfo');
 	localStorage.removeItem('trolleyItems');
@@ -69,7 +72,7 @@ export const register = (name, email, password) => async (dispatch) => {
 		};
 
 		const { data } = await axios.post(
-			'api/users/users',
+			'api/users/',
 			{ name, email, password },
 			config
 		);

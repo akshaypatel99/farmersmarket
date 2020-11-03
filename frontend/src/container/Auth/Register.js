@@ -102,10 +102,7 @@ const Register = ({ history, location }) => {
 
 			<Row className='py-3'>
 				<Col>
-					<Link
-						className='ml-1'
-						to={redirect ? `/login?redirect=${redirect}` : '/login'}
-					>
+					<Link className='ml-1' to={'/login'}>
 						Have an account? <strong>Log in here</strong>
 					</Link>
 				</Col>

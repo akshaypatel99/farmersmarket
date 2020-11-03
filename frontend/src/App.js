@@ -20,8 +20,8 @@ const App = () => {
 			<Header />
 			<main className='py-3'>
 				<Container>
-					<Route path='/register' component={Register} />
 					<Route path='/login' component={Login} />
+					<Route path='/register' component={Register} />
 					<Route path='/profile' component={Profile} />
 					<Route path='/product/:id' component={Product} />
 					<Route path='/trolley/:id?' component={Trolley} />

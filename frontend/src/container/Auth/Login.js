@@ -74,11 +74,8 @@ const Login = ({ history, location }) => {
 
 			<Row className='py-3'>
 				<Col>
-					<Link
-						className='ml-1'
-						to={redirect ? `/register?redirect=${redirect}` : '/register'}
-					>
-						Have an account? <strong>Register here</strong>
+					<Link className='ml-1' to={'/register'}>
+						Don't have an account? <strong>Register here</strong>
 					</Link>
 				</Col>
 			</Row>
