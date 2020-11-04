@@ -186,11 +186,29 @@ export const listAllOrdersReducer = (state = { orders: [] }, action) => {
 				loading: false,
 				error: action.payload,
 			};
-		case actionTypes.ADMIN_ORDER_LIST_RESET:
+		default:
+			return state;
+	}
+};
+
+export const orderDeliveredReducer = (state = {}, action) => {
+	switch (action.type) {
+		case actionTypes.ADMIN_ORDER_DELIVERED_REQUEST:
+			return {
+				loading: true,
+			};
+		case actionTypes.ADMIN_ORDER_DELIVERED_SUCCESS:
 			return {
 				loading: false,
-				orders: [],
+				successful: true,
 			};
+		case actionTypes.ADMIN_ORDER_DELIVERED_FAIL:
+			return {
+				loading: false,
+				error: action.payload,
+			};
+		case actionTypes.ADMIN_ORDER_DELIVERED_RESET:
+			return {};
 		default:
 			return state;
 	}

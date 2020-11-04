@@ -8,6 +8,7 @@ import {
 	updateProduct,
 	createProduct,
 	getUserOrders,
+	updateOrderToDelivered,
 } from '../controllers/adminController.js';
 import { authMid, adminMid } from '../middleware/authMiddleware.js';
 
@@ -36,5 +37,8 @@ router.delete('/product/:id', authMid, adminMid, deleteProduct);
 
 // GET /api/admin/orders/ - Get user orders
 router.get('/orders', authMid, adminMid, getUserOrders);
+
+// PUT /api/admin/orders/:id/deliver - Update order to delivered
+router.put('/orders/:id/deliver', authMid, adminMid, updateOrderToDelivered);
 
 export default router;

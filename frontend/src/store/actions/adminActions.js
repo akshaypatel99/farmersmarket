@@ -276,3 +276,40 @@ export const listAllOrders = () => async (dispatch, getState) => {
 		});
 	}
 };
+
+export const deliverOrder = (order) => async (dispatch, getState) => {
+	try {
+		dispatch({
+			type: actionTypes.ADMIN_ORDER_DELIVERED_REQUEST,
+		});
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		const { data } = await axios.put(
+			`/api/admin/orders/${order._id}/deliver`,
+			{},
+			config
+		);
+
+		dispatch({
+			type: actionTypes.ADMIN_ORDER_DELIVERED_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		dispatch({
+			type: actionTypes.ADMIN_ORDER_DELIVERED_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+};

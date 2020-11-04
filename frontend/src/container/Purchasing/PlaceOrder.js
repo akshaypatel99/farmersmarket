@@ -51,7 +51,7 @@ const PlaceOrder = ({ history }) => {
 				orderItems: trolley.trolleyItems,
 				deliveryAddress: trolley.deliveryAddress,
 				paymentMethod: trolley.paymentMethod,
-				trolleyTotal: trolley.itemsPrice,
+				trolleyTotal: trolley.trolleyTotal,
 				deliveryPrice: trolley.deliveryPrice,
 				totalPrice: trolley.totalPrice,
 			})
