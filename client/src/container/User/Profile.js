@@ -5,6 +5,7 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import { getUserProfile, updateProfile } from '../../store/actions/userActions';
 import { getUserOrders } from '../../store/actions/orderActions';
+import { localDate } from '../../util/localDate';
 import {
 	Button,
 	Col,
@@ -37,8 +38,6 @@ const Profile = ({ history, location }) => {
 
 	const orderUserList = useSelector((state) => state.orderUserList);
 	const { loading: loadingOrders, error: errorOrders, orders } = orderUserList;
-
-	// const redirect = location.search ? location.search.split('=')[1] : '/';
 
 	useEffect(() => {
 		if (!userInfo) {
@@ -142,11 +141,11 @@ const Profile = ({ history, location }) => {
 							{orders.map((order) => (
 								<tr key={order._id}>
 									<td>{order._id}</td>
-									<td>{order.createdAt.substring(0, 10)}</td>
+									<td>{localDate(order.createdAt)}</td>
 									<td>{order.totalPrice}</td>
 									<td>
 										{order.isPaid ? (
-											order.paidAt.substring(0, 10)
+											localDate(order.paidAt)
 										) : (
 											<i
 												className='far fa-times-circle'
@@ -156,7 +155,7 @@ const Profile = ({ history, location }) => {
 									</td>
 									<td>
 										{order.isDelivered ? (
-											order.deliveredAt.substring(0, 10)
+											localDate(order.deliveredAt)
 										) : (
 											<i
 												className='far fa-times-circle'

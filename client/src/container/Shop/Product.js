@@ -17,6 +17,7 @@ import {
 import Rating from '../../components/Rating';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
+import { localDate } from '../../util/localDate';
 import {
 	listProductProfile,
 	createProductReview,
@@ -172,7 +173,7 @@ const Product = ({ history, match }) => {
 									<ListGroupItem key={rvw._id}>
 										<strong>{rvw.name}</strong>
 										<Rating value={rvw.rating} />
-										<p>{rvw.createdAt.substring(0, 10)}</p>
+										<p>{localDate(rvw.createdAt)}</p>
 										<p>{rvw.comment}</p>
 									</ListGroupItem>
 								))}

@@ -5,6 +5,7 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import { Button, Table } from 'react-bootstrap';
 import { listAllUsers, deleteUser } from '../../store/actions/adminActions';
+import { localDate } from '../../util/localDate';
 
 const UserList = ({ history }) => {
 	const [deleted, setDeleted] = useState(false);
@@ -55,6 +56,7 @@ const UserList = ({ history }) => {
 							<th>USER ID</th>
 							<th>NAME</th>
 							<th>EMAIL</th>
+							<th>CREATED</th>
 							<th>ADMIN</th>
 							<th>EDIT</th>
 							<th>DELETE</th>
@@ -72,6 +74,7 @@ const UserList = ({ history }) => {
 										<strong>{user.email}</strong>
 									</a>
 								</td>
+								<td>{localDate(user.createdAt)}</td>
 								<td>
 									{user.isAdmin ? (
 										<i

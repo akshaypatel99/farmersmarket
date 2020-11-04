@@ -36,11 +36,17 @@ export const orderDetailsReducer = (
 			return {
 				loading: false,
 				order: action.payload,
+				success: true,
 			};
 		case actionTypes.ORDER_DETAILS_FAIL:
 			return {
 				loading: false,
 				error: action.payload,
+			};
+		case actionTypes.ORDER_DETAILS_RESET:
+			return {
+				orderItems: [],
+				shippingAddress: {},
 			};
 		default:
 			return state;

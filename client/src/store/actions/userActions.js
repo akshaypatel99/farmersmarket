@@ -50,6 +50,9 @@ export const logout = () => (dispatch) => {
 		type: actionTypes.TROLLEY_RESET,
 	});
 	dispatch({
+		type: actionTypes.ORDER_DETAILS_RESET,
+	});
+	dispatch({
 		type: actionTypes.ADMIN_USER_LIST_RESET,
 	});
 
@@ -57,6 +60,7 @@ export const logout = () => (dispatch) => {
 	localStorage.removeItem('trolleyItems');
 	localStorage.removeItem('deliveryAddress');
 	localStorage.removeItem('paymentMethod');
+	localStorage.removeItem('orderDetails');
 };
 
 export const register = (name, email, password) => async (dispatch) => {

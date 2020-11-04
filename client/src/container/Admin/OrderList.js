@@ -5,6 +5,7 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import { Button, Table } from 'react-bootstrap';
 import { listAllOrders } from '../../store/actions/adminActions';
+import { localDate } from '../../util/localDate';
 
 const OrderList = ({ history }) => {
 	const dispatch = useDispatch();
@@ -49,11 +50,11 @@ const OrderList = ({ history }) => {
 								<td>
 									<strong>{order.user && order.user.name}</strong>
 								</td>
-								<td>{order.createdAt.substring(0, 10)}</td>
+								<td>{localDate(order.createdAt)}</td>
 								<td>{order.totalPrice.toFixed(2)}</td>
 								<td>
 									{order.isPaid ? (
-										order.paidAt.substring(0, 10)
+										localDate(order.paidAt)
 									) : (
 										<i
 											className='far fa-times-circle'
@@ -63,7 +64,7 @@ const OrderList = ({ history }) => {
 								</td>
 								<td>
 									{order.isDelivered ? (
-										order.deliveredAt.substring(0, 10)
+										localDate(order.deliveredAt)
 									) : (
 										<i
 											className='far fa-times-circle'

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 import {
 	Row,
 	Col,
@@ -20,6 +21,7 @@ import {
 	ORDER_PAY_RESET,
 	ADMIN_ORDER_DELIVERED_RESET,
 	TROLLEY_RESET,
+	ORDER_DETAILS_RESET,
 } from '../../store/actions/actionTypes';
 
 const Order = ({ history, match }) => {
@@ -28,7 +30,7 @@ const Order = ({ history, match }) => {
 	const orderId = match.params.id;
 
 	const orderDetails = useSelector((state) => state.orderDetails);
-	const { order, loading, error } = orderDetails;
+	const { loading, error, success, order } = orderDetails;
 
 	const orderPay = useSelector((state) => state.orderPay);
 	const { successful: successfulPay } = orderPay;
@@ -44,16 +46,6 @@ const Order = ({ history, match }) => {
 
 	const dispatch = useDispatch();
 
-	if (!loading) {
-		const addDecimals = (num) => {
-			return (Math.round(num * 100) / 100).toFixed(2);
-		};
-
-		order.trolleyTotal = addDecimals(
-			order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
-		);
-	}
-
 	useEffect(() => {
 		if (!userInfo) {
 			history.push('/login');
@@ -64,7 +56,7 @@ const Order = ({ history, match }) => {
 			script.type = 'text/javascript';
 			script.async = true;
 			script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-			script.onLoad = () => {
+			script.onload = () => {
 				setScriptLoaded(true);
 			};
 			document.body.appendChild(script);
@@ -74,6 +66,7 @@ const Order = ({ history, match }) => {
 			dispatch({ type: ORDER_PAY_RESET });
 			dispatch({ type: ADMIN_ORDER_DELIVERED_RESET });
 			dispatch({ type: TROLLEY_RESET });
+			dispatch({ type: ORDER_DETAILS_RESET });
 			dispatch(getOrderDetails(orderId));
 		} else if (!order.isPaid) {
 			if (!window.paypal) {
@@ -84,13 +77,25 @@ const Order = ({ history, match }) => {
 		}
 	}, [
 		userInfo,
+		scriptLoaded,
 		history,
 		dispatch,
 		order,
 		orderId,
+		success,
 		successfulPay,
 		successfulDelivered,
 	]);
+
+	if (!loading) {
+		const addDecimals = (num) => {
+			return (Math.round(num * 100) / 100).toFixed(2);
+		};
+
+		order.trolleyTotal = addDecimals(
+			order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+		);
+	}
 
 	const successfulPaymentHandler = (paymentResult) => {
 		dispatch(payOrder(orderId, paymentResult));
@@ -226,6 +231,18 @@ const Order = ({ history, match }) => {
 										>
 											Mark As Delivered
 										</Button>
+									</ListGroupItem>
+								)}
+							{userInfo &&
+								userInfo.isAdmin &&
+								order.isPaid &&
+								order.isDelivered && (
+									<ListGroupItem>
+										<LinkContainer to='/orders'>
+											<Button type='button' className='btn btn-block'>
+												Return to All Orders
+											</Button>
+										</LinkContainer>
 									</ListGroupItem>
 								)}
 						</ListGroup>
