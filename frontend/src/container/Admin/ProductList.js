@@ -8,13 +8,16 @@ import { listProducts } from '../../store/actions/productActions';
 import { deleteProduct, createProduct } from '../../store/actions/adminActions';
 import { ADMIN_PRODUCT_CREATE_RESET } from '../../store/actions/actionTypes';
 import Rating from '../../components/Rating';
+import Paginate from '../../components/Paginate';
 
 const ProductList = ({ history, match }) => {
 	const [deleted, setDeleted] = useState(false);
 	const dispatch = useDispatch();
 
+	const pageNumber = match.params.pageNumber || 1;
+
 	const productList = useSelector((state) => state.productList);
-	const { products, loading, error } = productList;
+	const { products, pages, page, loading, error } = productList;
 
 	const productDelete = useSelector((state) => state.productDelete);
 	const {
@@ -39,7 +42,7 @@ const ProductList = ({ history, match }) => {
 		if (!userInfo.isAdmin) {
 			history.push('/');
 		} else {
-			dispatch(listProducts());
+			dispatch(listProducts('', pageNumber));
 		}
 
 		if (successCreate) {
@@ -53,6 +56,7 @@ const ProductList = ({ history, match }) => {
 		successCreate,
 		createdProduct,
 		successDelete,
+		pageNumber,
 	]);
 
 	const createProductHandler = () => {
@@ -88,62 +92,65 @@ const ProductList = ({ history, match }) => {
 			) : error ? (
 				<Message variant='danger'>{error}</Message>
 			) : (
-				<Table striped hover responsive>
-					<thead>
-						<tr>
-							<th>PRODUCT ID</th>
-							<th>NAME</th>
-							<th>PRICE (£)</th>
-							<th>CATEGORY</th>
-							<th>STOCK COUNT</th>
-							<th>RATING</th>
-							<th>REVIEW COUNT</th>
-						</tr>
-					</thead>
-					<tbody>
-						{products.map((product) => (
-							<tr key={product._id}>
-								<td>{product._id}</td>
-								<td>
-									<strong>{product.name}</strong>
-								</td>
-								<td>
-									<strong>{product.price}</strong>
-								</td>
-								<td>{product.category}</td>
-								<td>
-									<strong>{product.countInStock}</strong>
-								</td>
-								<td>
-									<Rating value={product.rating} color='#888' />
-								</td>
-								<td>{product.numReviews}</td>
-								<td>
-									<LinkContainer to={`/editproducts/${product._id}/`}>
-										<Button variant='info' className='btn-sm'>
+				<>
+					<Table striped hover responsive>
+						<thead>
+							<tr>
+								<th>PRODUCT ID</th>
+								<th>NAME</th>
+								<th>PRICE (£)</th>
+								<th>CATEGORY</th>
+								<th>STOCK COUNT</th>
+								<th>RATING</th>
+								<th>REVIEW COUNT</th>
+							</tr>
+						</thead>
+						<tbody>
+							{products.map((product) => (
+								<tr key={product._id}>
+									<td>{product._id}</td>
+									<td>
+										<strong>{product.name}</strong>
+									</td>
+									<td>
+										<strong>{product.price}</strong>
+									</td>
+									<td>{product.category}</td>
+									<td>
+										<strong>{product.countInStock}</strong>
+									</td>
+									<td>
+										<Rating value={product.rating} color='#888' />
+									</td>
+									<td>{product.numReviews}</td>
+									<td>
+										<LinkContainer to={`/editproducts/${product._id}/`}>
+											<Button variant='info' className='btn-sm'>
+												<i
+													className='fas fa-user-edit'
+													style={{ color: 'white' }}
+												></i>
+											</Button>
+										</LinkContainer>
+									</td>
+									<td>
+										<Button
+											variant='danger'
+											className='btn-sm'
+											onClick={() => deleteProductHandler(product._id)}
+										>
 											<i
-												className='fas fa-user-edit'
+												className='fas fa-trash-alt'
 												style={{ color: 'white' }}
 											></i>
 										</Button>
-									</LinkContainer>
-								</td>
-								<td>
-									<Button
-										variant='danger'
-										className='btn-sm'
-										onClick={() => deleteProductHandler(product._id)}
-									>
-										<i
-											className='fas fa-trash-alt'
-											style={{ color: 'white' }}
-										></i>
-									</Button>
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</Table>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</Table>
+					<Paginate pages={pages} page={page} isAdmin={true} />
+				</>
 			)}
 		</>
 	);
