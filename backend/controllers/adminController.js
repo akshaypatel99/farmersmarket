@@ -94,13 +94,10 @@ export const updateProduct = asyncHandler(async (req, res, next) => {
 	if (product) {
 		product.name = req.body.name;
 		product.price = req.body.price;
-		product.user = req.body.user;
 		product.image = req.body.image;
 		product.category = req.body.category;
 		product.description = req.body.description;
 		product.countInStock = req.body.countInStock;
-		product.rating = req.body.rating;
-		product.numReviews = req.body.numReviews;
 
 		const updatedProduct = await product.save();
 		res.json(updatedProduct);
@@ -108,4 +105,10 @@ export const updateProduct = asyncHandler(async (req, res, next) => {
 		res.status(404);
 		throw new Error('Product not found');
 	}
+});
+
+// GET /api/admin/orders/ - Get user orders
+export const getUserOrders = asyncHandler(async (req, res) => {
+	const orders = await Order.find().populate('user', 'id name');
+	res.json(orders);
 });

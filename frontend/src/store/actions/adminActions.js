@@ -172,3 +172,107 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
 		});
 	}
 };
+
+export const createProduct = () => async (dispatch, getState) => {
+	try {
+		dispatch({
+			type: actionTypes.ADMIN_PRODUCT_CREATE_REQUEST,
+		});
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		const { data } = await axios.post(`/api/admin/product/create`, {}, config);
+
+		dispatch({
+			type: actionTypes.ADMIN_PRODUCT_CREATE_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		dispatch({
+			type: actionTypes.ADMIN_PRODUCT_CREATE_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+};
+
+export const updateProduct = (product) => async (dispatch, getState) => {
+	try {
+		dispatch({
+			type: actionTypes.ADMIN_PRODUCT_UPDATE_REQUEST,
+		});
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		const { data } = await axios.put(
+			`/api/admin/product/${product._id}`,
+			product,
+			config
+		);
+
+		dispatch({
+			type: actionTypes.ADMIN_PRODUCT_UPDATE_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		dispatch({
+			type: actionTypes.ADMIN_PRODUCT_UPDATE_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+};
+
+export const listAllOrders = () => async (dispatch, getState) => {
+	try {
+		dispatch({
+			type: actionTypes.ADMIN_ORDER_LIST_REQUEST,
+		});
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		const { data } = await axios.get(`api/admin/orders/`, config);
+
+		dispatch({
+			type: actionTypes.ADMIN_ORDER_LIST_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		dispatch({
+			type: actionTypes.ADMIN_ORDER_LIST_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+};

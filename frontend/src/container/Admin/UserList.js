@@ -17,7 +17,6 @@ const UserList = ({ history }) => {
 	const { userInfo } = userLogin;
 
 	const userDelete = useSelector((state) => state.userDelete);
-	// prettier-ignore
 	const {
 		success: successDelete,
 		loading: loadingDelete,

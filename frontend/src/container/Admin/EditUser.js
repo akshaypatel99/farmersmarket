@@ -32,8 +32,11 @@ const EditUser = ({ match, history, location }) => {
 	const { loading, error, user } = adminGetUser;
 
 	const adminUpdateUser = useSelector((state) => state.adminUpdateUser);
-	// prettier-ignore
-	const { loading:loadingUpdate, error:errorUpdate, success:successUpdate } = adminUpdateUser;
+	const {
+		loading: loadingUpdate,
+		error: errorUpdate,
+		success: successUpdate,
+	} = adminUpdateUser;
 
 	useEffect(() => {
 		if (successUpdate) {
@@ -48,7 +51,6 @@ const EditUser = ({ match, history, location }) => {
 				setIsAdmin(user.isAdmin);
 			}
 		}
-		// dispatch(adminGetUserProfile(userId));
 	}, [dispatch, user, userId, successUpdate, history, name]);
 
 	const submitHandler = (e) => {
@@ -97,8 +99,8 @@ const EditUser = ({ match, history, location }) => {
 
 						<FormGroup controlId='isAdmin'>
 							<FormCheck
-								type='checkbox'
-								id='checkbox'
+								type='switch'
+								id='switch'
 								label='Admin'
 								checked={isAdmin}
 								onChange={(e) => setIsAdmin(e.target.checked)}

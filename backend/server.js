@@ -1,3 +1,4 @@
+import path from 'path';
 import express from 'express';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
@@ -8,6 +9,7 @@ import productRoutes from './routes/productRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
 
 dotenv.config();
 
@@ -26,10 +28,14 @@ app.use('/api/products', productRoutes);
 app.use('/api/users', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/upload', uploadRoutes);
 
 app.get('/api/config/paypal', (req, res, next) =>
 	res.send(process.env.PAYPAL_CLIENT_ID)
 );
+
+const __dirname = path.resolve();
+app.use('/images', express.static(path.join(__dirname, '/images')));
 
 app.use(notFound);
 

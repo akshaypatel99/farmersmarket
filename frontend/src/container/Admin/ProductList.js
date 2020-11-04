@@ -5,7 +5,8 @@ import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import { Button, Table, Row, Col } from 'react-bootstrap';
 import { listProducts } from '../../store/actions/productActions';
-import { deleteProduct } from '../../store/actions/adminActions';
+import { deleteProduct, createProduct } from '../../store/actions/adminActions';
+import { ADMIN_PRODUCT_CREATE_RESET } from '../../store/actions/actionTypes';
 import Rating from '../../components/Rating';
 
 const ProductList = ({ history, match }) => {
@@ -15,26 +16,48 @@ const ProductList = ({ history, match }) => {
 	const productList = useSelector((state) => state.productList);
 	const { products, loading, error } = productList;
 
-	const productDelete = useSelector((state) => state.productList);
-	// prettier-ignore
+	const productDelete = useSelector((state) => state.productDelete);
 	const {
-		success:successDelete,
-		loading:loadingDelete,
-		error:errorDelete,
+		success: successDelete,
+		loading: loadingDelete,
+		error: errorDelete,
 	} = productDelete;
+
+	const productCreate = useSelector((state) => state.productCreate);
+	const {
+		success: successCreate,
+		loading: loadingCreate,
+		error: errorCreate,
+		product: createdProduct,
+	} = productCreate;
 
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
 	useEffect(() => {
-		if (userInfo && userInfo.isAdmin) {
-			dispatch(listProducts());
-		} else {
+		dispatch({ type: ADMIN_PRODUCT_CREATE_RESET });
+		if (!userInfo.isAdmin) {
 			history.push('/');
+		} else {
+			dispatch(listProducts());
 		}
-	}, [dispatch, history, userInfo, deleted, successDelete]);
 
-	const createProductHandler = () => {};
+		if (successCreate) {
+			history.push(`/editproducts/${createdProduct._id}`);
+		}
+	}, [
+		dispatch,
+		history,
+		userInfo,
+		deleted,
+		successCreate,
+		createdProduct,
+		successDelete,
+	]);
+
+	const createProductHandler = () => {
+		dispatch(createProduct());
+	};
 
 	const deleteProductHandler = (id) => {
 		if (window.confirm('Are you sure you want to delete user?')) {
@@ -58,6 +81,8 @@ const ProductList = ({ history, match }) => {
 			</Row>
 			{loadingDelete && <Loader />}
 			{errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+			{loadingCreate && <Loader />}
+			{errorCreate && <Message variant='danger'>{errorCreate}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (

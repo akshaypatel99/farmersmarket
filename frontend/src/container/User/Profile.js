@@ -36,8 +36,7 @@ const Profile = ({ history, location }) => {
 	const { successful } = updatedUserProfile;
 
 	const orderUserList = useSelector((state) => state.orderUserList);
-	// prettier-ignore
-	const { loading:loadingOrders, error:errorOrders, orders } = orderUserList;
+	const { loading: loadingOrders, error: errorOrders, orders } = orderUserList;
 
 	// const redirect = location.search ? location.search.split('=')[1] : '/';
 

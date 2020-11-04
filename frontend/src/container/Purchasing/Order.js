@@ -25,8 +25,7 @@ const Order = ({ history, match }) => {
 	const { order, loading, error } = orderDetails;
 
 	const orderPay = useSelector((state) => state.orderPay);
-	// prettier-ignore
-	const { successful:successfulPay } = orderPay;
+	const { successful: successfulPay } = orderPay;
 
 	const dispatch = useDispatch();
 
