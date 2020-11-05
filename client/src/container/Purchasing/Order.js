@@ -63,7 +63,12 @@ const Order = ({ history, match }) => {
 			document.body.appendChild(script);
 		};
 
-		if (!order || successfulPay || successfulDelivered) {
+		if (
+			!order ||
+			successfulPay ||
+			successfulDelivered ||
+			order._id !== orderId
+		) {
 			dispatch({ type: ORDER_PAY_RESET });
 			dispatch({ type: ADMIN_ORDER_DELIVERED_RESET });
 			dispatch({ type: TROLLEY_RESET });
