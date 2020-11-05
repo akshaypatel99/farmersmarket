@@ -55,12 +55,13 @@ const Payment = ({ history }) => {
 							label='Stripe'
 							id='Stripe'
 							value='Stripe'
+							disabled
 							onChange={(e) => setPaymentMethod(e.target.value)}
 						></FormCheck>
 					</Col>
 				</FormGroup>
 				<Button variant='primary' type='submit'>
-					Continue to Payment
+					Continue to Place Order
 				</Button>
 			</Form>
 		</FormWrap>

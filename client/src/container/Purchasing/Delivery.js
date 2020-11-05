@@ -64,7 +64,7 @@ const Delivery = ({ history }) => {
 				</FormGroup>
 
 				<Button variant='primary' type='submit'>
-					Continue to Payment
+					Continue to Payment Method
 				</Button>
 			</Form>
 		</FormWrap>

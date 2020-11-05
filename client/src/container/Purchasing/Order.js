@@ -29,6 +29,9 @@ const Order = ({ history, match }) => {
 
 	const orderId = match.params.id;
 
+	const trolley = useSelector((state) => state.trolley);
+	const { paymentMethod } = trolley;
+
 	const orderDetails = useSelector((state) => state.orderDetails);
 	const { loading, error, success, order } = orderDetails;
 
@@ -65,8 +68,6 @@ const Order = ({ history, match }) => {
 		if (!order || successfulPay || successfulDelivered) {
 			dispatch({ type: ORDER_PAY_RESET });
 			dispatch({ type: ADMIN_ORDER_DELIVERED_RESET });
-			dispatch({ type: TROLLEY_RESET });
-			dispatch({ type: ORDER_DETAILS_RESET });
 			dispatch(getOrderDetails(orderId));
 		} else if (!order.isPaid) {
 			if (!window.paypal) {
@@ -74,6 +75,11 @@ const Order = ({ history, match }) => {
 			} else {
 				setScriptLoaded(true);
 			}
+		}
+
+		if (successfulPay || successfulDelivered) {
+			dispatch({ type: TROLLEY_RESET });
+			dispatch({ type: ORDER_DETAILS_RESET });
 		}
 	}, [
 		userInfo,
@@ -206,7 +212,7 @@ const Order = ({ history, match }) => {
 									<Col>£{order.totalPrice}</Col>
 								</Row>
 							</ListGroup.Item>
-							{!order.isPaid && (
+							{paymentMethod === 'PayPal' && !order.isPaid && (
 								<ListGroupItem>
 									{!scriptLoaded ? (
 										<Loader />
