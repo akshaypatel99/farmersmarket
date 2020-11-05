@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import Product from '../models/productModel.js';
+import User from '../models/userModel.js';
 
 // GET /api/products
 export const getProducts = asyncHandler(async (req, res, next) => {
@@ -32,7 +33,7 @@ export const getProduct = asyncHandler(async (req, res, next) => {
 	}
 });
 
-// POST /api//products/:id/reviews - Create new product view
+// POST /api/products/:id/reviews - Create new product view
 export const createProductReview = asyncHandler(async (req, res, next) => {
 	const product = await Product.findById(req.params.id);
 

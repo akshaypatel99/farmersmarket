@@ -14,6 +14,7 @@ router.get('/', getProducts);
 // GET /api/products/:id
 router.get('/:id', getProduct);
 
-// POST /api//products/:id/reviews - Create new product view
+// POST /api/products/:id/reviews - Create new product view
 router.post('/:id/reviews', authMid, createProductReview);
+
 export default router;
