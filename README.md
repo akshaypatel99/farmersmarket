@@ -1,6 +1,6 @@
 # farmersmarket
 
-A MERN stack app built with Create React App for client side, Node Express for server side and MongoDB for the database.
+A MERN stack app built with Create React App for client side, Node Express for server side and MongoDB for the database. Used React Bootstrap for front-end framework and React-Redux for state management.
 
 Users
 -
