@@ -167,7 +167,9 @@ const Product = ({ history, match }) => {
 					<Row>
 						<Col md={6}>
 							<h2>Product Reviews</h2>
-							{product.reviews.length === 0 && <Message>No Reviews</Message>}
+							{product.reviews.length === 0 && (
+								<Message>No Written Reviews</Message>
+							)}
 							<ListGroup variant='flush'>
 								{product.reviews.map((rvw) => (
 									<ListGroupItem key={rvw._id}>
