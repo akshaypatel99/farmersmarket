@@ -13,15 +13,15 @@ import {
 } from 'react-bootstrap';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
-import { getOrderDetails, payOrder } from '../../store/actions/orderActions';
-import { deliverOrder } from '../../store/actions/adminActions';
+import { getOrderDetails, payOrder } from '../../redux/actions/orderActions';
+import { deliverOrder } from '../../redux/actions/adminActions';
 import axios from 'axios';
 import { PayPalButton } from 'react-paypal-button-v2';
 import {
 	ORDER_PAY_RESET,
 	ADMIN_ORDER_DELIVERED_RESET,
 	TROLLEY_RESET,
-} from '../../store/actions/actionTypes';
+} from '../../redux/actions/actionTypes';
 
 const Order = ({ history, match }) => {
 	const [scriptLoaded, setScriptLoaded] = useState(false);

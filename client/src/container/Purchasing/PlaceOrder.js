@@ -12,7 +12,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import CheckoutSteps from '../../components/CheckoutSteps';
-import { createOrder } from '../../store/actions/orderActions';
+import { createOrder } from '../../redux/actions/orderActions';
 // import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 
 const PlaceOrder = ({ history }) => {

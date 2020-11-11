@@ -21,8 +21,8 @@ import { localDate } from '../../util/localDate';
 import {
 	listProductProfile,
 	createProductReview,
-} from '../../store/actions/productActions';
-import { PRODUCT_CREATE_REVIEW_RESET } from '../../store/actions/actionTypes';
+} from '../../redux/actions/productActions';
+import { PRODUCT_CREATE_REVIEW_RESET } from '../../redux/actions/actionTypes';
 
 const Product = ({ history, match }) => {
 	const prodId = match.params.id;

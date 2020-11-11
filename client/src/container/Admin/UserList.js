@@ -4,7 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import { Button, Table } from 'react-bootstrap';
-import { listAllUsers, deleteUser } from '../../store/actions/adminActions';
+import { listAllUsers, deleteUser } from '../../redux/actions/adminActions';
 import { localDate } from '../../util/localDate';
 
 const UserList = ({ history }) => {

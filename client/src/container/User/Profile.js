@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
-import { getUserProfile, updateProfile } from '../../store/actions/userActions';
-import { getUserOrders } from '../../store/actions/orderActions';
+import { getUserProfile, updateProfile } from '../../redux/actions/userActions';
+import { getUserOrders } from '../../redux/actions/orderActions';
 import { localDate } from '../../util/localDate';
 import {
 	Button,

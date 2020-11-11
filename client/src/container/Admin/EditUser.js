@@ -7,8 +7,8 @@ import FormWrap from '../../components/Form';
 import {
 	adminGetUserProfile,
 	adminUpdateProfile,
-} from '../../store/actions/adminActions';
-import { ADMIN_USER_UPDATE_PROFILE_RESET } from '../../store/actions/actionTypes';
+} from '../../redux/actions/adminActions';
+import { ADMIN_USER_UPDATE_PROFILE_RESET } from '../../redux/actions/actionTypes';
 import {
 	Button,
 	Form,

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import FormWrap from '../../components/Form';
-import { saveDeliveryAddress } from '../../store/actions/trolleyActions';
+import { saveDeliveryAddress } from '../../redux/actions/trolleyActions';
 import CheckoutSteps from '../../components/CheckoutSteps';
 
 import {
@@ -29,7 +29,7 @@ const Delivery = ({ history }) => {
 		<FormWrap>
 			<CheckoutSteps step1 step2 />
 			<h1>DELIVERY</h1>
-			<Form onSubmit={submitHandler}>
+			<Form onSubmit={submitHandler} data-testid='form'>
 				<FormGroup controlId='address'>
 					<FormLabel>Address:</FormLabel>
 					<FormControl

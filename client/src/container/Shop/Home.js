@@ -5,7 +5,7 @@ import Product from '../../components/Product';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 import Paginate from '../../components/Paginate';
-import { listProducts } from '../../store/actions/productActions';
+import { listProducts } from '../../redux/actions/productActions';
 
 const Home = ({ match }) => {
 	const keyword = match.params.keyword;
@@ -19,29 +19,29 @@ const Home = ({ match }) => {
 		dispatch(listProducts(keyword, pageNumber));
 	}, [dispatch, keyword, pageNumber]);
 
-	let home = <Loader />;
-
-	if (!loading && error) {
-		home = <Message variant='danger'>{error}</Message>;
-	} else {
-		home = (
-			<>
-				<Row>
-					{products.map((product) => (
-						<Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-							<Product product={product} />
-						</Col>
-					))}
-				</Row>
-				<Paginate pages={pages} page={page} keyword={keyword ? keyword : ''} />
-			</>
-		);
-	}
 	return (
 		<>
 			<h1>Farm Fresh Groceries</h1>
-
-			{home}
+			{loading ? (
+				<Loader />
+			) : error ? (
+				<Message variant='danger'>{error}</Message>
+			) : (
+				<>
+					<Row>
+						{products.map((product) => (
+							<Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+								<Product product={product} />
+							</Col>
+						))}
+					</Row>
+					<Paginate
+						pages={pages}
+						page={page}
+						keyword={keyword ? keyword : ''}
+					/>
+				</>
+			)}
 		</>
 	);
 };

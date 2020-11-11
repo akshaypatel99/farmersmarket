@@ -15,7 +15,7 @@ import {
 import {
 	addToTrolley,
 	removeFromTrolley,
-} from '../../store/actions/trolleyActions';
+} from '../../redux/actions/trolleyActions';
 
 const Trolley = ({ history, location, match }) => {
 	const prodId = match.params.id;

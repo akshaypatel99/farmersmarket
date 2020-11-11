@@ -4,9 +4,9 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import { Button, Table, Row, Col } from 'react-bootstrap';
-import { listProducts } from '../../store/actions/productActions';
-import { deleteProduct, createProduct } from '../../store/actions/adminActions';
-import { ADMIN_PRODUCT_CREATE_RESET } from '../../store/actions/actionTypes';
+import { listProducts } from '../../redux/actions/productActions';
+import { deleteProduct, createProduct } from '../../redux/actions/adminActions';
+import { ADMIN_PRODUCT_CREATE_RESET } from '../../redux/actions/actionTypes';
 import Rating from '../../components/Rating';
 import Paginate from '../../components/Paginate';
 

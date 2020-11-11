@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import FormWrap from '../../components/Form';
-import { register } from '../../store/actions/userActions';
+import { register } from '../../redux/actions/userActions';
 import {
 	Button,
 	Col,

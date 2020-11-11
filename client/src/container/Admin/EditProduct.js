@@ -5,9 +5,9 @@ import axios from 'axios';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import FormWrap from '../../components/Form';
-import { updateProduct } from '../../store/actions/adminActions';
-import { listProductProfile } from '../../store/actions/productActions';
-import { ADMIN_PRODUCT_UPDATE_RESET } from '../../store/actions/actionTypes';
+import { updateProduct } from '../../redux/actions/adminActions';
+import { listProductProfile } from '../../redux/actions/productActions';
+import { ADMIN_PRODUCT_UPDATE_RESET } from '../../redux/actions/actionTypes';
 import {
 	Button,
 	Form,

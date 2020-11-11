@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import FormWrap from '../../components/Form';
-import { login } from '../../store/actions/userActions';
+import { login } from '../../redux/actions/userActions';
 import {
 	Button,
 	Col,
@@ -16,7 +16,7 @@ import {
 	Row,
 } from 'react-bootstrap';
 
-const Login = ({ history, location }) => {
+const Login = ({ history }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
@@ -25,13 +25,13 @@ const Login = ({ history, location }) => {
 	const userLogin = useSelector((state) => state.userLogin);
 	const { loading, error, userInfo } = userLogin;
 
-	const redirect = location.search ? location.search.split('=')[1] : '/';
+	// const redirect = location.search ? location.search.split('=')[1] : '/';
 
 	useEffect(() => {
 		if (userInfo) {
-			history.push(redirect);
+			history.push('/');
 		}
-	}, [history, redirect, userInfo]);
+	}, [history, userInfo]);
 
 	const submitHandler = (e) => {
 		e.preventDefault();
@@ -43,12 +43,12 @@ const Login = ({ history, location }) => {
 			<h1>Log In</h1>
 			{error && <Message variant='danger'>{error}</Message>}
 			{loading && <Loader />}
-			<Form onSubmit={submitHandler}>
+			<Form onSubmit={submitHandler} data-testid='form'>
 				<FormGroup controlId='formBasicEmail'>
 					<FormLabel>Email address:</FormLabel>
 					<FormControl
 						type='email'
-						placeholder='e.g. farmer@market.com'
+						placeholder='Enter email address'
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 					/>
@@ -61,7 +61,7 @@ const Login = ({ history, location }) => {
 					<FormLabel>Password:</FormLabel>
 					<FormControl
 						type='password'
-						placeholder='******'
+						placeholder='Enter password'
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
