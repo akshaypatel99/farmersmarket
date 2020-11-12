@@ -2,6 +2,8 @@
 
 A MERN stack app built with Create React App for client side, Node Express for server side and MongoDB for the database. Used React Bootstrap for front-end framework and React-Redux for state management.
 
+https://farmers-market-shop.herokuapp.com/
+
 Users
 -
 Are able to register and login in order to purchase items from the Farmer's Market online shop using PayPal.
