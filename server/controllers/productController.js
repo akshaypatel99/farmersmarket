@@ -22,7 +22,7 @@ export const getProducts = asyncHandler(async (req, res, next) => {
 	res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
-// GET /api/products/:id
+// GET /api/products/product/:id
 export const getProduct = asyncHandler(async (req, res, next) => {
 	const product = await Product.findById(req.params.id);
 	if (product) {
@@ -33,7 +33,7 @@ export const getProduct = asyncHandler(async (req, res, next) => {
 	}
 });
 
-// POST /api/products/:id/reviews - Create new product view
+// POST /api/products/product/:id/reviews - Create new product view
 export const createProductReview = asyncHandler(async (req, res, next) => {
 	const product = await Product.findById(req.params.id);
 
@@ -68,4 +68,11 @@ export const createProductReview = asyncHandler(async (req, res, next) => {
 		res.status(404);
 		throw new Error('Product not found');
 	}
+});
+
+// GET /api/products/top - Get top rated products
+export const getTopProducts = asyncHandler(async (req, res, next) => {
+	const products = await Product.find({}).sort({ rating: -1 }).limit(5);
+
+	res.json(products);
 });

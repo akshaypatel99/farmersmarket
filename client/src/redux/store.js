@@ -5,6 +5,7 @@ import {
 	productProfileReducer,
 	productListReducer,
 	createProductReviewReducer,
+	getTopProductsReducer,
 } from './reducers/productReducer';
 import { trolleyReducer } from './reducers/trolleyReducer';
 import {
@@ -35,6 +36,7 @@ const reducer = combineReducers({
 	productList: productListReducer,
 	productProfile: productProfileReducer,
 	productReview: createProductReviewReducer,
+	productTopRated: getTopProductsReducer,
 	trolley: trolleyReducer,
 	userLogin: loginReducer,
 	userRegister: registerReducer,

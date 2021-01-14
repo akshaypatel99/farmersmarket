@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Image, Container } from 'react-bootstrap';
 import Product from '../../components/Product';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
 import Paginate from '../../components/Paginate';
+import banner from '../../assets/fm-banner.png';
 import { listProducts } from '../../redux/actions/productActions';
 
 const Home = ({ match }) => {
@@ -20,8 +21,11 @@ const Home = ({ match }) => {
 	}, [dispatch, keyword, pageNumber]);
 
 	return (
-		<>
-			<h1>Farm Fresh Groceries</h1>
+		<div className='home'>
+			<Container fluid>
+				<Image className='banner' src={banner} fluid />
+			</Container>
+			<h1>Our Products</h1>
 			{loading ? (
 				<Loader />
 			) : error ? (
@@ -42,7 +46,7 @@ const Home = ({ match }) => {
 					/>
 				</>
 			)}
-		</>
+		</div>
 	);
 };
 

@@ -33,3 +33,11 @@ h4 {
 .rating span {
 	margin: 0.1rem;
 }
+
+.home > h1 {
+	margin-left: 1rem;
+}
+
+.banner img {
+	min-height: 225px;
+}

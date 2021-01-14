@@ -30,7 +30,7 @@ export const listProductProfile = (id) => async (dispatch) => {
 	try {
 		dispatch({ type: actionTypes.PRODUCT_PROFILE_REQUEST });
 
-		const { data } = await axios.get(`/api/products/${id}`);
+		const { data } = await axios.get(`/api/products/product/${id}`);
 
 		dispatch({
 			type: actionTypes.PRODUCT_PROFILE_SUCCESS,
@@ -67,7 +67,7 @@ export const createProductReview = (prodId, review) => async (
 			},
 		};
 
-		await axios.post(`/api/products/${prodId}/reviews`, review, config);
+		await axios.post(`/api/products/product/${prodId}/reviews`, review, config);
 
 		dispatch({
 			type: actionTypes.PRODUCT_CREATE_REVIEW_SUCCESS,
@@ -75,6 +75,27 @@ export const createProductReview = (prodId, review) => async (
 	} catch (error) {
 		dispatch({
 			type: actionTypes.PRODUCT_CREATE_REVIEW_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+};
+
+export const listTopProducts = () => async (dispatch) => {
+	try {
+		dispatch({ type: actionTypes.PRODUCT_TOP_REQUEST });
+
+		const { data } = await axios.get(`/api/products/top`);
+
+		dispatch({
+			type: actionTypes.PRODUCT_TOP_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		dispatch({
+			type: actionTypes.PRODUCT_TOP_FAIL,
 			payload:
 				error.response && error.response.data.message
 					? error.response.data.message
