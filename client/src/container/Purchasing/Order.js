@@ -138,7 +138,7 @@ const Order = ({ history, match }) => {
 									Delivered on {order.deliveredAt}
 								</Message>
 							) : (
-								<Message variant='danger'>Not Delivered</Message>
+								<Message variant='danger'>Delivered due on:</Message>
 							)}
 						</ListGroupItem>
 

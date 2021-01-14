@@ -65,7 +65,7 @@ const userInfoLS = localStorage.getItem('userInfo')
 
 const deliverAddressLS = localStorage.getItem('deliveryAddress')
 	? JSON.parse(localStorage.getItem('deliveryAddress'))
-	: null;
+	: {};
 
 const initialState = {
 	trolley: { trolleyItems: trolleyItemsLS, deliveryAddress: deliverAddressLS },

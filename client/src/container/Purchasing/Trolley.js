@@ -25,8 +25,10 @@ const Trolley = ({ history, location, match }) => {
 	const dispatch = useDispatch();
 
 	const trolley = useSelector((state) => state.trolley);
-
 	const { trolleyItems } = trolley;
+
+	const userLogin = useSelector((state) => state.userLogin);
+	const { userInfo } = userLogin;
 
 	useEffect(() => {
 		if (prodId) {
@@ -39,7 +41,11 @@ const Trolley = ({ history, location, match }) => {
 	};
 
 	const checkoutHandler = () => {
-		history.push('/login?redirect=delivery');
+		if (!userInfo) {
+			history.push('/login');
+		} else {
+			history.push('/delivery');
+		}
 	};
 
 	return (
