@@ -15,7 +15,7 @@ import CheckoutSteps from '../../components/CheckoutSteps';
 import { createOrder } from '../../redux/actions/orderActions';
 // import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 
-const PlaceOrder = ({ history }) => {
+const ReviewOrder = ({ history }) => {
 	const dispatch = useDispatch();
 
 	const addDecimals = (num) => {
@@ -28,7 +28,7 @@ const PlaceOrder = ({ history }) => {
 		trolley.trolleyItems.reduce((acc, item) => acc + item.price * item.qty, 0)
 	);
 
-	trolley.deliveryPrice = addDecimals(trolley.trolleyTotal > 40 ? 0 : 6.25);
+	trolley.deliveryPrice = addDecimals(trolley.trolleyTotal > 40 ? 0 : 4.75);
 
 	trolley.totalPrice = (
 		Number(trolley.trolleyTotal) + Number(trolley.deliveryPrice)
@@ -50,6 +50,7 @@ const PlaceOrder = ({ history }) => {
 			createOrder({
 				orderItems: trolley.trolleyItems,
 				deliveryAddress: trolley.deliveryAddress,
+				deliveryDate: trolley.deliveryDate,
 				paymentMethod: trolley.paymentMethod,
 				trolleyTotal: trolley.trolleyTotal,
 				deliveryPrice: trolley.deliveryPrice,
@@ -60,24 +61,31 @@ const PlaceOrder = ({ history }) => {
 
 	return (
 		<>
-			<CheckoutSteps step1 step2 step3 step4 />
-			<h1>PLACE ORDER</h1>
+			<CheckoutSteps step1 step2 step3 step4 step5 />
+			<h1>REVIEW ORDER</h1>
 			<Row>
 				<Col md={8}>
 					<ListGroup variant='flush'>
 						<ListGroupItem>
-							<h2>Delivery</h2>
+							<h2>Delivery Address</h2>
 							<p>
-								<strong>Address: </strong> {trolley.deliveryAddress.address},{' '}
-								{trolley.deliveryAddress.city},{' '}
-								{trolley.deliveryAddress.postcode}
+								<strong>
+									{' '}
+									{trolley.deliveryAddress.address},{' '}
+									{trolley.deliveryAddress.city},{' '}
+									{trolley.deliveryAddress.postcode}
+								</strong>
 							</p>
 						</ListGroupItem>
 
 						<ListGroupItem>
+							<h2>Delivery Date</h2>
+							<strong>{trolley.deliveryDate}</strong>
+						</ListGroupItem>
+
+						<ListGroupItem>
 							<h2>Payment Method</h2>
-							<strong>Method: </strong>
-							{trolley.paymentMethod}
+							<strong>{trolley.paymentMethod}</strong>
 						</ListGroupItem>
 
 						<ListGroupItem>
@@ -162,4 +170,4 @@ const PlaceOrder = ({ history }) => {
 	);
 };
 
-export default PlaceOrder;
+export default ReviewOrder;

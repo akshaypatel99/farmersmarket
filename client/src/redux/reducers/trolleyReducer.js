@@ -39,11 +39,18 @@ export const trolleyReducer = (
 				deliveryAddress: action.payload,
 			};
 
+		case actionTypes.TROLLEY_SAVE_DELIVERY_DATE:
+			return {
+				...state,
+				deliveryDate: action.payload,
+			};
+
 		case actionTypes.TROLLEY_SAVE_PAYMENT_METHOD:
 			return {
 				...state,
 				paymentMethod: action.payload,
 			};
+
 		case actionTypes.TROLLEY_RESET:
 			return {
 				trolleyItems: [],

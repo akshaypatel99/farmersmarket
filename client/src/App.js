@@ -8,9 +8,10 @@ import Trolley from './container/Purchasing/Trolley';
 import Login from './container/Auth/Login';
 import Register from './container/Auth/Register';
 import Profile from './container/User/Profile';
-import Delivery from './container/Purchasing/Delivery';
-import Payment from './container/Purchasing/Payment';
-import PlaceOrder from './container/Purchasing/PlaceOrder';
+import DeliveryAddress from './container/Purchasing/DeliveryAddress';
+import DeliveryDate from './container/Purchasing/DeliveryDate';
+import PaymentMethod from './container/Purchasing/PaymentMethod';
+import ReviewOrder from './container/Purchasing/ReviewOrder';
 import Order from './container/Purchasing/Order';
 import UserList from './container/Admin/UserList';
 import EditUser from './container/Admin/EditUser';
@@ -29,9 +30,10 @@ const App = () => {
 					<Route path='/profile' component={Profile} />
 					<Route path='/product/:id' component={Product} />
 					<Route path='/trolley/:id?' component={Trolley} />
-					<Route path='/delivery' component={Delivery} />
-					<Route path='/payment' component={Payment} />
-					<Route path='/placeorder' component={PlaceOrder} />
+					<Route path='/delivery-address' component={DeliveryAddress} />
+					<Route path='/delivery-date' component={DeliveryDate} />
+					<Route path='/payment-method' component={PaymentMethod} />
+					<Route path='/review-order' component={ReviewOrder} />
 					<Route path='/order/:id' component={Order} />
 					<Route path='/users' component={UserList} />
 					<Route path='/editusers/:id/' component={EditUser} />

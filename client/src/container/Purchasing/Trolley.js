@@ -44,13 +44,13 @@ const Trolley = ({ history, location, match }) => {
 		if (!userInfo) {
 			history.push('/login');
 		} else {
-			history.push('/delivery');
+			history.push('/delivery-address');
 		}
 	};
 
 	return (
 		<>
-			<Link className='btn btn-light my-3' to='/'>
+			<Link className='btn btn-primary my-3' to='/'>
 				Return to Shop
 			</Link>
 			<Row>

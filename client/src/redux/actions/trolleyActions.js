@@ -43,6 +43,15 @@ export const saveDeliveryAddress = (data) => (dispatch) => {
 	localStorage.setItem('deliveryAddress', JSON.stringify(data));
 };
 
+export const saveDeliveryDate = (data) => (dispatch) => {
+	dispatch({
+		type: actionTypes.TROLLEY_SAVE_DELIVERY_DATE,
+		payload: data,
+	});
+
+	localStorage.setItem('deliveryDate', JSON.stringify(data));
+};
+
 export const savePaymentMethod = (data) => (dispatch) => {
 	dispatch({
 		type: actionTypes.TROLLEY_SAVE_PAYMENT_METHOD,

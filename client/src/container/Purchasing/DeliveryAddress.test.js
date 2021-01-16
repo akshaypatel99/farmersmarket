@@ -5,14 +5,14 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from '../../redux/store';
 
-import Delivery from './Delivery';
+import DeliveryAddress from './DeliveryAddress';
 
 describe('Delivery', () => {
 	it('renders Delivery form component', () => {
 		render(
 			<Provider store={store}>
 				<BrowserRouter>
-					<Delivery />
+					<DeliveryAddress />
 				</BrowserRouter>
 			</Provider>
 		);

@@ -1,9 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Card } from 'react-bootstrap';
+import { Link, useHistory } from 'react-router-dom';
+import { Card, Button } from 'react-bootstrap';
 import Rating from './Rating';
 
 const Product = ({ product }) => {
+	const history = useHistory();
+
+	const addToTrolleyHandler = () => {
+		history.push(`/trolley/${product._id}?qty=1`);
+	};
+
 	return (
 		<Card className='my-3 p-3 rounded'>
 			<Link to={`/product/${product._id}`}>
@@ -26,6 +32,15 @@ const Product = ({ product }) => {
 
 				<Card.Text as='h4'>£ {product.price.toFixed(2)}</Card.Text>
 			</Card.Body>
+
+			<Button
+				className='btn btn-sm'
+				type='button'
+				disabled={product.countInStock === 0}
+				onClick={addToTrolleyHandler}
+			>
+				ADD TO <i className='fas fa-shopping-cart px-2'></i>
+			</Button>
 		</Card>
 	);
 };

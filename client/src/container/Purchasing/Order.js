@@ -99,7 +99,7 @@ const Order = ({ history, match }) => {
 		};
 
 		order.trolleyTotal = addDecimals(
-			order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+			order?.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
 		);
 	}
 
@@ -135,10 +135,14 @@ const Order = ({ history, match }) => {
 							</p>
 							{order.isDelivered ? (
 								<Message variant='success'>
-									Delivered on {order.deliveredAt}
+									<em>Delivered on: </em>
+									<strong>{order.deliveredAt.slice(0, 10)}</strong>
 								</Message>
 							) : (
-								<Message variant='danger'>Delivery due on:</Message>
+								<Message variant='danger'>
+									<em>Delivery due on: </em>
+									<strong>{order.deliveryDate}</strong>
+								</Message>
 							)}
 						</ListGroupItem>
 
@@ -149,7 +153,10 @@ const Order = ({ history, match }) => {
 								{order.paymentMethod}
 							</p>
 							{order.isPaid ? (
-								<Message variant='success'>Paid on {order.paidAt}</Message>
+								<Message variant='success'>
+									<em>Paid on: </em>
+									<strong>{order.paidAt.slice(0, 10)}</strong>
+								</Message>
 							) : (
 								<Message variant='danger'>Not Paid</Message>
 							)}
@@ -208,8 +215,12 @@ const Order = ({ history, match }) => {
 							</ListGroup.Item>
 							<ListGroup.Item>
 								<Row>
-									<Col>Total</Col>
-									<Col>£{order.totalPrice}</Col>
+									<Col>
+										<strong>Total</strong>
+									</Col>
+									<Col>
+										<strong>£{order.totalPrice}</strong>
+									</Col>
 								</Row>
 							</ListGroup.Item>
 							{!order.isPaid && (
