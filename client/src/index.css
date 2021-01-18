@@ -26,6 +26,11 @@ h2 {
 	padding: 0.5rem 0;
 }
 
+h3 {
+	font-size: 1.1rem;
+	padding: 0.25rem 0;
+}
+
 h4 {
 	padding: 1rem 0;
 }
@@ -40,4 +45,13 @@ h4 {
 
 .banner img {
 	min-height: 225px;
+}
+
+.navtab h2 {
+	font-size: 1.3rem;
+	padding: 0.25rem;
+}
+
+.navtab.active h2 {
+	color: white;
 }

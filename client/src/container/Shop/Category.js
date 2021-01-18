@@ -6,21 +6,19 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Product from '../../components/Product';
 import Loader from '../../components/Loader';
 import Message from '../../components/Message';
-import Paginate from '../../components/Paginate';
 import banner from '../../assets/fm-banner.png';
-import { listProducts } from '../../redux/actions/productActions';
+import { listCategoryProducts } from '../../redux/actions/productActions';
 
-const Home = () => {
+const Category = () => {
 	const { keyword } = useParams();
-	const { pageNumber } = useParams() || 1;
 	const dispatch = useDispatch();
 
-	const productList = useSelector((state) => state.productList);
-	const { loading, error, products, page, pages } = productList;
+	const productCategoryList = useSelector((state) => state.productCategoryList);
+	const { loading, error, products } = productCategoryList;
 
 	useEffect(() => {
-		dispatch(listProducts(keyword, pageNumber));
-	}, [dispatch, keyword, pageNumber]);
+		dispatch(listCategoryProducts(keyword));
+	}, [dispatch, keyword]);
 
 	return (
 		<div className='home'>
@@ -29,8 +27,8 @@ const Home = () => {
 			</Container>
 			<Nav className='nav-tab mt-4 mb-3'>
 				<Nav.Item>
-					<LinkContainer to='/'>
-						<Nav.Link className='navtab bg-primary' data-toggle='tab'>
+					<LinkContainer to='/' exact>
+						<Nav.Link className='navtab bg-light' data-toggle='tab'>
 							<h2>All Products</h2>
 						</Nav.Link>
 					</LinkContainer>
@@ -38,7 +36,14 @@ const Home = () => {
 
 				<Nav.Item>
 					<LinkContainer to='/category/meat'>
-						<Nav.Link className='navtab bg-light' data-toggle='tab'>
+						<Nav.Link
+							className={
+								keyword === 'meat'
+									? 'navtab active bg-primary'
+									: 'navtab bg-light'
+							}
+							data-toggle='tab'
+						>
 							<h2>Meat</h2>
 						</Nav.Link>
 					</LinkContainer>
@@ -46,7 +51,14 @@ const Home = () => {
 
 				<Nav.Item>
 					<LinkContainer to='/category/vegetable'>
-						<Nav.Link className='navtab bg-light' data-toggle='tab'>
+						<Nav.Link
+							className={
+								keyword === 'vegetable'
+									? 'navtab active bg-primary'
+									: 'navtab bg-light'
+							}
+							data-toggle='tab'
+						>
 							<h2>Vegetables</h2>
 						</Nav.Link>
 					</LinkContainer>
@@ -54,7 +66,14 @@ const Home = () => {
 
 				<Nav.Item>
 					<LinkContainer to='/category/fruit'>
-						<Nav.Link className='navtab bg-light' data-toggle='tab'>
+						<Nav.Link
+							className={
+								keyword === 'fruit'
+									? 'navtab active bg-primary'
+									: 'navtab bg-light'
+							}
+							data-toggle='tab'
+						>
 							<h2>Fruit</h2>
 						</Nav.Link>
 					</LinkContainer>
@@ -62,7 +81,14 @@ const Home = () => {
 
 				<Nav.Item>
 					<LinkContainer to='/category/cupboard'>
-						<Nav.Link className='navtab bg-light' data-toggle='tab'>
+						<Nav.Link
+							className={
+								keyword === 'cupboard'
+									? 'navtab active bg-primary'
+									: 'navtab bg-light'
+							}
+							data-toggle='tab'
+						>
 							<h2>Cupboard</h2>
 						</Nav.Link>
 					</LinkContainer>
@@ -82,15 +108,10 @@ const Home = () => {
 							</Col>
 						))}
 					</Row>
-					<Paginate
-						pages={pages}
-						page={page}
-						keyword={keyword ? keyword : ''}
-					/>
 				</>
 			)}
 		</div>
 	);
 };
 
-export default Home;
+export default Category;

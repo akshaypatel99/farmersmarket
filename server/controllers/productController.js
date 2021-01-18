@@ -2,7 +2,7 @@ import asyncHandler from 'express-async-handler';
 import Product from '../models/productModel.js';
 import User from '../models/userModel.js';
 
-// GET /api/products
+// GET /api/products - Get all products and by keyword/search word
 export const getProducts = asyncHandler(async (req, res, next) => {
 	const pageSize = 8;
 	const page = Number(req.query.pageNumber) || 1;
@@ -75,4 +75,19 @@ export const getTopProducts = asyncHandler(async (req, res, next) => {
 	const products = await Product.find({}).sort({ rating: -1 }).limit(5);
 
 	res.json(products);
+});
+
+// GET /api/products/category - Get products by category
+export const getProductsByCategory = asyncHandler(async (req, res, next) => {
+	const keyword = req.query.keyword
+		? {
+				category: {
+					$regex: req.query.keyword,
+					$options: 'i',
+				},
+		  }
+		: {};
+	const products = await Product.find({ ...keyword });
+
+	res.json({ products });
 });

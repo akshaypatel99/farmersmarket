@@ -103,3 +103,26 @@ export const listTopProducts = () => async (dispatch) => {
 		});
 	}
 };
+
+export const listCategoryProducts = (keyword = '') => async (dispatch) => {
+	try {
+		dispatch({ type: actionTypes.PRODUCT_CATEGORY_REQUEST });
+
+		const { data } = await axios.get(
+			`/api/products/category?keyword=${keyword}`
+		);
+
+		dispatch({
+			type: actionTypes.PRODUCT_CATEGORY_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		dispatch({
+			type: actionTypes.PRODUCT_CATEGORY_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+};

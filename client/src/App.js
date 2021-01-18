@@ -18,6 +18,7 @@ import EditUser from './container/Admin/EditUser';
 import ProductList from './container/Admin/ProductList';
 import EditProduct from './container/Admin/EditProduct';
 import OrderList from './container/Admin/OrderList';
+import Category from './container/Shop/Category';
 
 const App = () => {
 	return (
@@ -41,6 +42,7 @@ const App = () => {
 					<Route path='/products/:pageNumber' component={ProductList} exact />
 					<Route path='/editproducts/:id/' component={EditProduct} />
 					<Route path='/orders' component={OrderList} />
+					<Route path='/category/:keyword' component={Category} exact />
 					<Route path='/search/:keyword' component={Home} exact />
 					<Route path='/page/:pageNumber' component={Home} exact />
 					<Route
