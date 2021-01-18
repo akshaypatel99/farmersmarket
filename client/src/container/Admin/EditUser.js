@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import FormWrap from '../../components/Form';
@@ -19,8 +19,9 @@ import {
 	FormText,
 } from 'react-bootstrap';
 
-const EditUser = ({ match, history, location }) => {
-	const userId = match.params.id;
+const EditUser = () => {
+	const { userId } = useParams();
+	let history = useHistory();
 
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import FormWrap from '../../components/Form';
@@ -16,7 +16,7 @@ import {
 	Row,
 } from 'react-bootstrap';
 
-const Register = ({ history, location }) => {
+const Register = () => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -24,6 +24,8 @@ const Register = ({ history, location }) => {
 	const [message, setMessage] = useState(null);
 
 	const dispatch = useDispatch();
+	let location = useLocation();
+	let history = useHistory();
 
 	const userRegister = useSelector((state) => state.userRegister);
 	const { loading, error, userInfo } = userRegister;

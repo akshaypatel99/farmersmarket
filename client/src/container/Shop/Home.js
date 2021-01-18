@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Image, Container } from 'react-bootstrap';
 import Product from '../../components/Product';
@@ -8,9 +9,9 @@ import Paginate from '../../components/Paginate';
 import banner from '../../assets/fm-banner.png';
 import { listProducts } from '../../redux/actions/productActions';
 
-const Home = ({ match }) => {
-	const keyword = match.params.keyword;
-	const pageNumber = match.params.pageNumber || 1;
+const Home = () => {
+	const { keyword } = useParams();
+	const { pageNumber } = useParams() || 1;
 	const dispatch = useDispatch();
 
 	const productList = useSelector((state) => state.productList);

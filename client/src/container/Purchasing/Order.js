@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import {
 	Row,
@@ -23,10 +23,11 @@ import {
 	TROLLEY_RESET,
 } from '../../redux/actions/actionTypes';
 
-const Order = ({ history, match }) => {
+const Order = () => {
 	const [scriptLoaded, setScriptLoaded] = useState(false);
 
-	const orderId = match.params.id;
+	const { orderId } = useParams();
+	let history = useHistory();
 
 	const trolley = useSelector((state) => state.trolley);
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import FormWrap from '../../components/Form';
 import { saveDeliveryAddress } from '../../redux/actions/trolleyActions';
@@ -12,12 +13,13 @@ import {
 	FormControl,
 } from 'react-bootstrap';
 
-const DeliveryAddress = ({ history }) => {
+const DeliveryAddress = () => {
 	const [address, setAddress] = useState('');
 	const [city, setCity] = useState('');
 	const [postcode, setPostcode] = useState('');
 
 	const dispatch = useDispatch();
+	let history = useHistory();
 
 	const submitHandler = (e) => {
 		e.preventDefault();

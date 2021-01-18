@@ -6,9 +6,11 @@ import Loader from '../../components/Loader';
 import { Button, Table } from 'react-bootstrap';
 import { listAllOrders } from '../../redux/actions/adminActions';
 import { localDate } from '../../util/localDate';
+import { useHistory } from 'react-router-dom';
 
-const OrderList = ({ history }) => {
+const OrderList = () => {
 	const dispatch = useDispatch();
+	let history = useHistory();
 
 	const orderList = useSelector((state) => state.orderList);
 	const { orders, loading, error } = orderList;

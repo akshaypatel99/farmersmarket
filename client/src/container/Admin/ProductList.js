@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import Message from '../../components/Message';
@@ -10,11 +11,12 @@ import { ADMIN_PRODUCT_CREATE_RESET } from '../../redux/actions/actionTypes';
 import Rating from '../../components/Rating';
 import Paginate from '../../components/Paginate';
 
-const ProductList = ({ history, match }) => {
+const ProductList = () => {
+	let history = useHistory();
 	const [deleted, setDeleted] = useState(false);
 	const dispatch = useDispatch();
 
-	const pageNumber = match.params.pageNumber || 1;
+	const { pageNumber } = useParams() || 1;
 
 	const productList = useSelector((state) => state.productList);
 	const { products, pages, page, loading, error } = productList;
@@ -78,7 +80,7 @@ const ProductList = ({ history, match }) => {
 					<h1>All Products</h1>
 				</Col>
 				<Col className='text-right'>
-					<Button className='my-3' onClick={createProductHandler}>
+					<Button className='btn btn-info my-3' onClick={createProductHandler}>
 						<i className='fas fa-plus'></i> Create Product
 					</Button>
 				</Col>

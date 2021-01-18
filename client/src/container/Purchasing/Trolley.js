@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation, useParams } from 'react-router-dom';
 import Message from '../../components/Message';
 import {
 	Button,
@@ -17,8 +17,10 @@ import {
 	removeFromTrolley,
 } from '../../redux/actions/trolleyActions';
 
-const Trolley = ({ history, location, match }) => {
-	const prodId = match.params.id;
+const Trolley = () => {
+	const { prodId } = useParams();
+	let history = useHistory();
+	let location = useLocation();
 
 	const qty = location.search ? Number(location.search.split('=')[1]) : 1;
 

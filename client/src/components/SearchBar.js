@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Form, FormControl } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
-const SearchBar = ({ history }) => {
+const SearchBar = () => {
 	const [keyword, setKeyword] = useState('');
+	let history = useHistory();
 
 	const submitSearchHandler = (e) => {
 		e.preventDefault();

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import FormWrap from '../../components/Form';
@@ -16,16 +16,15 @@ import {
 	Row,
 } from 'react-bootstrap';
 
-const Login = ({ history }) => {
+const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
 	const dispatch = useDispatch();
+	let history = useHistory();
 
 	const userLogin = useSelector((state) => state.userLogin);
 	const { loading, error, userInfo } = userLogin;
-
-	// const redirect = location.search ? location.search.split('=')[1] : '/';
 
 	useEffect(() => {
 		if (userInfo) {

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import FormWrap from '../../components/Form';
 import { saveDeliveryDate } from '../../redux/actions/trolleyActions';
 import CheckoutSteps from '../../components/CheckoutSteps';
 import { Button, Form, FormLabel, FormGroup } from 'react-bootstrap';
 
-const DeliveryDate = ({ history }) => {
+const DeliveryDate = () => {
+	let history = useHistory();
 	const trolley = useSelector((state) => state.trolley);
 	const { deliveryAddress } = trolley;
 

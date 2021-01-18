@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import Message from '../../components/Message';
@@ -18,7 +19,7 @@ import {
 	Table,
 } from 'react-bootstrap';
 
-const Profile = ({ history, location }) => {
+const Profile = () => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -26,6 +27,7 @@ const Profile = ({ history, location }) => {
 	const [message, setMessage] = useState(null);
 
 	const dispatch = useDispatch();
+	let history = useHistory();
 
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;

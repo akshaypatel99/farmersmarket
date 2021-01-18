@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import {
 	Button,
 	Row,
@@ -15,8 +15,9 @@ import CheckoutSteps from '../../components/CheckoutSteps';
 import { createOrder } from '../../redux/actions/orderActions';
 // import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 
-const ReviewOrder = ({ history }) => {
+const ReviewOrder = () => {
 	const dispatch = useDispatch();
+	let history = useHistory();
 
 	const addDecimals = (num) => {
 		return (Math.round(num * 100) / 100).toFixed(2);

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import FormWrap from '../../components/Form';
 import { savePaymentMethod } from '../../redux/actions/trolleyActions';
@@ -13,7 +14,8 @@ import {
 	Row,
 } from 'react-bootstrap';
 
-const PaymentMethod = ({ history }) => {
+const PaymentMethod = () => {
+	let history = useHistory();
 	const trolley = useSelector((state) => state.trolley);
 	const { deliveryDate } = trolley;
 

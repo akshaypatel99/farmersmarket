@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
@@ -17,8 +17,9 @@ import {
 	FormFile,
 } from 'react-bootstrap';
 
-const EditProduct = ({ match, history, location }) => {
-	const prodId = match.params.id;
+const EditProduct = () => {
+	const { prodId } = useParams();
+	let history = useHistory();
 
 	const [name, setName] = useState('');
 	const [price, setPrice] = useState(0);
