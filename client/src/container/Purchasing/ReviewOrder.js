@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/Message';
 import CheckoutSteps from '../../components/CheckoutSteps';
 import { createOrder } from '../../redux/actions/orderActions';
+import { localDate } from '../../util/localDate';
 // import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 
 const ReviewOrder = () => {
@@ -81,7 +82,7 @@ const ReviewOrder = () => {
 
 						<ListGroupItem>
 							<h2>Delivery Date</h2>
-							<strong>{trolley.deliveryDate}</strong>
+							<strong>{localDate(trolley.deliveryDate)}</strong>
 						</ListGroupItem>
 
 						<ListGroupItem>

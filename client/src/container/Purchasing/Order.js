@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import {
 	Row,
@@ -22,11 +22,12 @@ import {
 	ADMIN_ORDER_DELIVERED_RESET,
 	TROLLEY_RESET,
 } from '../../redux/actions/actionTypes';
+import { localDate } from '../../util/localDate';
 
-const Order = ({ match }) => {
+const Order = () => {
 	const [scriptLoaded, setScriptLoaded] = useState(false);
 
-	const orderId = match.params.id;
+	const { orderId } = useParams();
 	let history = useHistory();
 
 	const trolley = useSelector((state) => state.trolley);
@@ -137,12 +138,12 @@ const Order = ({ match }) => {
 							{order.isDelivered ? (
 								<Message variant='success'>
 									<em>Delivered on: </em>
-									<strong>{order.deliveredAt.slice(0, 10)}</strong>
+									<strong>{localDate(order.deliveredAt)}</strong>
 								</Message>
 							) : (
 								<Message variant='danger'>
 									<em>Delivery due on: </em>
-									<strong>{order.deliveryDate}</strong>
+									<strong>{localDate(order.deliveryDate)}</strong>
 								</Message>
 							)}
 						</ListGroupItem>
@@ -156,7 +157,7 @@ const Order = ({ match }) => {
 							{order.isPaid ? (
 								<Message variant='success'>
 									<em>Paid on: </em>
-									<strong>{order.paidAt.slice(0, 10)}</strong>
+									<strong>{localDate(order.paidAt)}</strong>
 								</Message>
 							) : (
 								<Message variant='danger'>Not Paid</Message>

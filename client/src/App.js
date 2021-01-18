@@ -29,18 +29,18 @@ const App = () => {
 					<Route path='/login' component={Login} />
 					<Route path='/register' component={Register} />
 					<Route path='/profile' component={Profile} />
-					<Route path='/product/:id' component={Product} />
-					<Route path='/trolley/:id?' component={Trolley} />
+					<Route path='/product/:prodId' component={Product} />
+					<Route path='/trolley/:prodId?' component={Trolley} />
 					<Route path='/delivery-address' component={DeliveryAddress} />
 					<Route path='/delivery-date' component={DeliveryDate} />
 					<Route path='/payment-method' component={PaymentMethod} />
 					<Route path='/review-order' component={ReviewOrder} />
-					<Route path='/order/:id' component={Order} />
+					<Route path='/order/:orderId' component={Order} />
 					<Route path='/users' component={UserList} />
-					<Route path='/editusers/:id/' component={EditUser} />
+					<Route path='/editusers/:userId/' component={EditUser} />
 					<Route path='/products' component={ProductList} exact />
 					<Route path='/products/:pageNumber' component={ProductList} exact />
-					<Route path='/editproducts/:id/' component={EditProduct} />
+					<Route path='/editproducts/:prodId/' component={EditProduct} />
 					<Route path='/orders' component={OrderList} />
 					<Route path='/category/:keyword' component={Category} exact />
 					<Route path='/search/:keyword' component={Home} exact />
