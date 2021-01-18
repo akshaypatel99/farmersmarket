@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import {
 	Row,
 	Col,
@@ -24,8 +24,8 @@ import {
 } from '../../redux/actions/productActions';
 import { PRODUCT_CREATE_REVIEW_RESET } from '../../redux/actions/actionTypes';
 
-const Product = () => {
-	const { prodId } = useParams();
+const Product = ({ match }) => {
+	const prodId = match.params.id;
 	let history = useHistory();
 
 	const [qty, setQty] = useState(1);

@@ -4,7 +4,7 @@ import { Card, Button } from 'react-bootstrap';
 import Rating from './Rating';
 
 const Product = ({ product }) => {
-	const history = useHistory();
+	let history = useHistory();
 
 	const addToTrolleyHandler = () => {
 		history.push(`/trolley/${product._id}?qty=1`);

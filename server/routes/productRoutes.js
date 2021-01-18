@@ -10,7 +10,7 @@ import { authMid } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-// GET /api/products
+// GET /api/products/product
 router.get('/', getProducts);
 
 // GET /api/products/product/:id

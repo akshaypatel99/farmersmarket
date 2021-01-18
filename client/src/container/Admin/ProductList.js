@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import Message from '../../components/Message';
@@ -11,12 +11,12 @@ import { ADMIN_PRODUCT_CREATE_RESET } from '../../redux/actions/actionTypes';
 import Rating from '../../components/Rating';
 import Paginate from '../../components/Paginate';
 
-const ProductList = () => {
+const ProductList = ({ match }) => {
 	let history = useHistory();
 	const [deleted, setDeleted] = useState(false);
 	const dispatch = useDispatch();
 
-	const { pageNumber } = useParams() || 1;
+	const pageNumber = match.params.id || 1;
 
 	const productList = useSelector((state) => state.productList);
 	const { products, pages, page, loading, error } = productList;

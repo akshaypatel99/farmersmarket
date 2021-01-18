@@ -2,7 +2,7 @@ import asyncHandler from 'express-async-handler';
 import Product from '../models/productModel.js';
 import User from '../models/userModel.js';
 
-// GET /api/products - Get all products and by keyword/search word
+// GET /api/products/product - Get all products and by keyword/search word
 export const getProducts = asyncHandler(async (req, res, next) => {
 	const pageSize = 8;
 	const page = Number(req.query.pageNumber) || 1;
