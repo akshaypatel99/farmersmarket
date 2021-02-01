@@ -22,7 +22,7 @@ export const getProducts = asyncHandler(async (req, res, next) => {
 	res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
-// GET /api/products/product/:id
+// GET /api/products/product/:id - Get single product by ID
 export const getProduct = asyncHandler(async (req, res, next) => {
 	const product = await Product.findById(req.params.id);
 	if (product) {
@@ -90,4 +90,75 @@ export const getProductsByCategory = asyncHandler(async (req, res, next) => {
 	const products = await Product.find({ ...keyword });
 
 	res.json({ products });
+});
+
+// POST /api/products/product/:id/favourite - Add user to product's favourites
+export const addFavouritedBy = asyncHandler(async (req, res, next) => {
+	const product = await Product.findById(req.params.id);
+	const user = await User.findById(req.user._id);
+
+	if (product && user) {
+		const previouslyFavourited = product.favouritedBy.find(
+			(fave) => fave.user.toString() === req.user._id.toString()
+		);
+
+		if (previouslyFavourited) {
+			res.status(400);
+			throw new Error('Product already favourited.');
+		}
+
+		product.favouritedBy.unshift({ user: req.user._id });
+
+		user.favouriteProducts.unshift({ product: req.params.id });
+
+		const updatedProduct = await product.save();
+		await user.save();
+		res.status(201).json({
+			updatedProduct,
+			message: 'User added to favouritedBy on Product.',
+		});
+	} else {
+		res.status(404);
+		throw new Error('Product not found');
+	}
+});
+
+// PUT /api/products/product/:id/favourite - Remover user from product's favourites
+export const removeFavouritedBy = asyncHandler(async (req, res, next) => {
+	const product = await Product.findById(req.params.id);
+	const user = await User.findById(req.user._id);
+
+	if (product && user) {
+		if (
+			product.favouritedBy.filter(
+				(fave) => fave.user.toString() === req.user._id.toString()
+			).length === 0
+		) {
+			res.status(400);
+			throw new Error('Product has not been favourited by user.');
+		}
+
+		// Get remove index
+		const prodRemoveIndex = product.favouritedBy
+			.map((fave) => fave.user.toString())
+			.indexOf(req.user._id);
+
+		product.favouritedBy.splice(prodRemoveIndex, 1);
+
+		const userRemoveIndex = user.favouriteProducts
+			.map((fave) => fave.product.toString())
+			.indexOf(req.params.id);
+
+		user.favouriteProducts.splice(userRemoveIndex, 1);
+
+		const updatedProduct = await product.save();
+		await user.save();
+		res.status(201).json({
+			updatedProduct,
+			message: 'User removed from favouritedBy on Product.',
+		});
+	} else {
+		res.status(404);
+		throw new Error('Product not found');
+	}
 });

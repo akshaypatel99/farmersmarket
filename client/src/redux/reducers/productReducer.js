@@ -118,3 +118,53 @@ export const productCategoryListReducer = (
 			return state;
 	}
 };
+
+export const favouriteProductReducer = (
+	state = { product: { favouritedBy: [] } },
+	action
+) => {
+	switch (action.type) {
+		case actionTypes.PRODUCT_FAVOURITE_REQUEST:
+			return {
+				loading: true,
+			};
+		case actionTypes.PRODUCT_FAVOURITE_SUCCESS:
+			return {
+				loading: false,
+				success: true,
+				product: action.payload,
+			};
+		case actionTypes.PRODUCT_FAVOURITE_FAIL:
+			return {
+				loading: false,
+				error: action.payload,
+			};
+		default:
+			return state;
+	}
+};
+
+export const unfavouriteProductReducer = (
+	state = { product: { favouritedBy: [] } },
+	action
+) => {
+	switch (action.type) {
+		case actionTypes.PRODUCT_UNFAVOURITE_REQUEST:
+			return {
+				loading: true,
+			};
+		case actionTypes.PRODUCT_UNFAVOURITE_SUCCESS:
+			return {
+				loading: false,
+				success: true,
+				product: action.payload,
+			};
+		case actionTypes.PRODUCT_UNFAVOURITE_FAIL:
+			return {
+				loading: false,
+				error: action.payload,
+			};
+		default:
+			return state;
+	}
+};

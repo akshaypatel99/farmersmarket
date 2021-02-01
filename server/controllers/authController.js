@@ -15,6 +15,7 @@ export const authUser = asyncHandler(async (req, res, next) => {
 			email: user.email,
 			isAdmin: user.isAdmin,
 			token: generateToken(user._id),
+			favouriteProducts: user.favouriteProducts,
 		});
 	} else {
 		res.status(401);
@@ -46,6 +47,7 @@ export const registerUser = asyncHandler(async (req, res) => {
 			email: user.email,
 			isAdmin: user.isAdmin,
 			token: generateToken(user._id),
+			favouriteProducts: user.favouriteProducts,
 		});
 	} else {
 		res.status(400);
@@ -63,6 +65,7 @@ export const getProfile = asyncHandler(async (req, res, next) => {
 			name: user.name,
 			email: user.email,
 			isAdmin: user.isAdmin,
+			favouriteProducts: user.favouriteProducts,
 		});
 	} else {
 		res.status(404);
@@ -89,6 +92,7 @@ export const updateProfile = asyncHandler(async (req, res, next) => {
 			email: updatedUser.email,
 			isAdmin: updatedUser.isAdmin,
 			token: generateToken(updatedUser._id),
+			favouriteProducts: user.favouriteProducts,
 		});
 	} else {
 		res.status(404);

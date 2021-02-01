@@ -126,3 +126,78 @@ export const listCategoryProducts = (keyword = '') => async (dispatch) => {
 		});
 	}
 };
+
+export const addFavouriteProduct = (prodId) => async (dispatch, getState) => {
+	try {
+		dispatch({ type: actionTypes.PRODUCT_FAVOURITE_REQUEST });
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		const { data } = await axios.post(
+			`/api/products/product/${prodId}/favourite`,
+			{ prodId },
+			config
+		);
+
+		dispatch({
+			type: actionTypes.PRODUCT_FAVOURITE_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		dispatch({
+			type: actionTypes.PRODUCT_FAVOURITE_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+};
+
+export const removeFavouriteProduct = (prodId) => async (
+	dispatch,
+	getState
+) => {
+	try {
+		dispatch({ type: actionTypes.PRODUCT_UNFAVOURITE_REQUEST });
+
+		const {
+			userLogin: { userInfo },
+		} = getState();
+
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${userInfo.token}`,
+			},
+		};
+
+		const { data } = await axios.put(
+			`/api/products/product/${prodId}/unfavourite`,
+			{ prodId },
+			config
+		);
+
+		dispatch({
+			type: actionTypes.PRODUCT_UNFAVOURITE_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		dispatch({
+			type: actionTypes.PRODUCT_UNFAVOURITE_FAIL,
+			payload:
+				error.response && error.response.data.message
+					? error.response.data.message
+					: error.message,
+		});
+	}
+};

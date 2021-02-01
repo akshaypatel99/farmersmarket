@@ -21,6 +21,8 @@ import { localDate } from '../../util/localDate';
 import {
 	listProductProfile,
 	createProductReview,
+	addFavouriteProduct,
+	removeFavouriteProduct,
 } from '../../redux/actions/productActions';
 import { PRODUCT_CREATE_REVIEW_RESET } from '../../redux/actions/actionTypes';
 
@@ -40,6 +42,18 @@ const Product = () => {
 	const productReview = useSelector((state) => state.productReview);
 	const { error: errorReview, success } = productReview;
 
+	const productFavourited = useSelector((state) => state.productFavourited);
+	const {
+		error: errorFavourited,
+		success: successFavourited,
+	} = productFavourited;
+
+	const productUnfavourited = useSelector((state) => state.productUnfavourited);
+	const {
+		error: errorUnfavourited,
+		success: successUnfavourited,
+	} = productUnfavourited;
+
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
@@ -49,9 +63,10 @@ const Product = () => {
 			setRating(0);
 			setComment('');
 			dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
+		} else if (successFavourited || successUnfavourited) {
+			dispatch(listProductProfile(prodId));
 		}
-		dispatch(listProductProfile(prodId));
-	}, [dispatch, prodId, success]);
+	}, [dispatch, prodId, success, successFavourited, successUnfavourited]);
 
 	const addToTrolleyHandler = () => {
 		history.push(`/trolley/${prodId}?qty=${qty}`);
@@ -67,10 +82,49 @@ const Product = () => {
 		);
 	};
 
+	let favButton = null;
+
+	const favouriteHandler = (e) => {
+		e.preventDefault();
+		dispatch(addFavouriteProduct(prodId));
+	};
+	const unFavouriteHandler = (e) => {
+		e.preventDefault();
+		dispatch(removeFavouriteProduct(prodId));
+	};
+
+	if (
+		product.favouritedBy &&
+		product.favouritedBy.filter((fave) => fave.user.toString() === userInfo._id)
+			.length > 0
+	) {
+		favButton = (
+			<Button
+				className='btn-block btn-secondary'
+				type='button'
+				disabled={product.countInStock === 0}
+				onClick={unFavouriteHandler}
+			>
+				FAVOURITED <i class='fas fa-heart'></i>
+			</Button>
+		);
+	} else {
+		favButton = (
+			<Button
+				className='btn-block btn-secondary'
+				type='button'
+				disabled={product.countInStock === 0}
+				onClick={favouriteHandler}
+			>
+				ADD TO FAVOURITES
+			</Button>
+		);
+	}
+
 	return (
 		<>
 			<Link className='btn btn-light my-3' to='/'>
-				Return to Shop
+				Go Back
 			</Link>
 			{loading ? (
 				<Loader />
@@ -78,7 +132,13 @@ const Product = () => {
 				<Message variant='danger'>{error}</Message>
 			) : (
 				<>
-					<Row>
+					{errorFavourited && (
+						<Message variant='secondary'>{errorFavourited}</Message>
+					)}
+					{errorUnfavourited && (
+						<Message variant='secondary'>{errorUnfavourited}</Message>
+					)}
+					<Row className='mt-4'>
 						<Col md={6}>
 							<Image src={product.image} alt={product.name} fluid />
 						</Col>
@@ -161,11 +221,13 @@ const Product = () => {
 											ADD TO TROLLEY
 										</Button>
 									</ListGroupItem>
+
+									<ListGroupItem>{favButton}</ListGroupItem>
 								</ListGroup>
 							</Card>
 						</Col>
 					</Row>
-					<Row>
+					<Row className='mt-4'>
 						<Col md={6}>
 							<h2>Product Reviews</h2>
 							{product.reviews.length === 0 && (

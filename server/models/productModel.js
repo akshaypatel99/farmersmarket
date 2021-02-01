@@ -58,6 +58,14 @@ const productSchema = mongoose.Schema(
 			default: 0,
 		},
 		reviews: [reviewSchema],
+		favouritedBy: [
+			{
+				user: {
+					type: mongoose.Schema.Types.ObjectId,
+					ref: 'User',
+				},
+			},
+		],
 	},
 	{
 		timestamps: true,
