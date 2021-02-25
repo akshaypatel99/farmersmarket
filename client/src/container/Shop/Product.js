@@ -65,6 +65,8 @@ const Product = () => {
 			dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
 		} else if (successFavourited || successUnfavourited) {
 			dispatch(listProductProfile(prodId));
+		} else {
+			dispatch(listProductProfile(prodId));
 		}
 	}, [dispatch, prodId, success, successFavourited, successUnfavourited]);
 
@@ -105,7 +107,7 @@ const Product = () => {
 				disabled={product.countInStock === 0}
 				onClick={unFavouriteHandler}
 			>
-				FAVOURITED <i class='fas fa-heart'></i>
+				FAVOURITED <i className='fas fa-heart'></i>
 			</Button>
 		);
 	} else {
