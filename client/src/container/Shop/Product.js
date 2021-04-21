@@ -88,7 +88,11 @@ const Product = () => {
 
 	const favouriteHandler = (e) => {
 		e.preventDefault();
-		dispatch(addFavouriteProduct(prodId));
+		if (!userInfo) {
+			history.push(`/login`);
+		} else {
+			dispatch(addFavouriteProduct(prodId));
+		}
 	};
 	const unFavouriteHandler = (e) => {
 		e.preventDefault();
@@ -96,6 +100,7 @@ const Product = () => {
 	};
 
 	if (
+		userInfo &&
 		product.favouritedBy &&
 		product.favouritedBy.filter((fave) => fave.user.toString() === userInfo._id)
 			.length > 0
